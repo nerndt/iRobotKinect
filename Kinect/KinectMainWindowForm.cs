@@ -484,7 +484,7 @@ namespace iRobotKinect
             }
 
             #region set FramesPerSecond
-            if (fpsEnd == 1 && this.dropDown_fps.Text != ""SolidBrush )
+            if (fpsEnd == 1 && this.dropDown_fps.Text != "")
             {
                 //FPS Suggestion. Bei niedrigen Frameraten werden empfangene Frames übersprungen (nicht angezeigt)
                 Int16 fps = Convert.ToInt16(this.dropDown_fps.Text);
