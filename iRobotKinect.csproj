@@ -1,0 +1,439 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5E210056-14B4-4F61-B997-4A064339579F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>iRobotKinect</RootNamespace>
+    <AssemblyName>iRobotKinect</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationVersion>0.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BootstrapperComponentsLocation>Relative</BootstrapperComponentsLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>E5D1005032A61EDA57C80851E16BB20419D00DBF</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>iRobotKinect_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Roomba.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Emgu.CV, Version=2.3.0.1416, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\KinectWinforms\Emgu.CV.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.UI, Version=2.3.0.1416, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\KinectWinforms\Emgu.CV.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.Util, Version=2.3.0.1416, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\KinectWinforms\Emgu.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="LightBuzz.Vitruvius, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\LightBuzz.Vitruvius\bin\Debug\LightBuzz.Vitruvius.dll</HintPath>
+    </Reference>
+    <Reference Include="LightBuzz.Vitruvius.WinForms, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\LightBuzz.Vitruvius.WinForms\bin\Debug\LightBuzz.Vitruvius.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Kinect, Version=1.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Kinect.Toolkit, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files\Microsoft SDKs\Kinect\Developer Toolkit v1.8.0\Samples\C#\Microsoft.Kinect.Toolkit\bin\Debug\Microsoft.Kinect.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Kinect.Toolkit.Fusion, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files\Microsoft SDKs\Kinect\Developer Toolkit v1.8.0\Samples\C#\Microsoft.Kinect.Toolkit.Fusion\bin\Debug\Microsoft.Kinect.Toolkit.Fusion.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\bin\Debug\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DepthSmoothing\CreateAverageDepthArray.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DepthSmoothing\CreateDepthArray.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DepthSmoothing\CreateFilteredDepthArray.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DepthSmoothing\CreateImageFromDepthImage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DepthSmoothing\CreateSmoothImageFromDepthArray.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iRobot\Config_Settings.cs" />
+    <Compile Include="Boneyard\frmConnection_Details.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boneyard\frmConnection_Details.Designer.cs">
+      <DependentUpon>frmConnection_Details.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Boneyard\frmCommand.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boneyard\frmCommand.Designer.cs">
+      <DependentUpon>frmCommand.cs</DependentUpon>
+    </Compile>
+    <Compile Include="iRobot\frmConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iRobot\frmConfig.Designer.cs">
+      <DependentUpon>frmConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="iRobot\frmDrive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iRobot\frmDrive.Designer.cs">
+      <DependentUpon>frmDrive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="iRobot\frmMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iRobot\frmMenu.Designer.cs">
+      <DependentUpon>frmMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="iRobot\frmPacket.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iRobot\frmPacket.Designer.cs">
+      <DependentUpon>frmPacket.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Boneyard\frmGraph.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boneyard\frmGraph.Designer.cs">
+      <DependentUpon>frmGraph.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Boneyard\frmLEDs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boneyard\frmLEDs.Designer.cs">
+      <DependentUpon>frmLEDs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Boneyard\frmMacro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boneyard\frmMacro.Designer.cs">
+      <DependentUpon>frmMacro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Boneyard\frmVirtual.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boneyard\frmVirtual.Designer.cs">
+      <DependentUpon>frmVirtual.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Boneyard\Line_2D.cs" />
+    <Compile Include="KinectCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KinectCtrl.Designer.cs">
+      <DependentUpon>KinectCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kinect\BitmapManipulator.cs" />
+    <Compile Include="Kinect\Canny.cs" />
+    <Compile Include="Kinect\ColorMap.cs" />
+    <Compile Include="Kinect\GraphicsCamera.cs" />
+    <Compile Include="Kinect\KinectCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kinect\KinectCtrl.Designer.cs">
+      <DependentUpon>KinectCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kinect\KinectFusionHelper.cs" />
+    <Compile Include="Kinect\KinectMainWindowForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kinect\KinectMainWindowForm.Designer.cs">
+      <DependentUpon>KinectMainWindowForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kinect\KinectSkeletonNGE.cs" />
+    <Compile Include="Kinect\LockBitmap.cs" />
+    <Compile Include="Kinect\MathHelper.cs" />
+    <Compile Include="Kinect\NGE.cs" />
+    <Compile Include="Kinect\PointCloud.cs" />
+    <Compile Include="Kinect\ScreenSpaceLines3D.cs" />
+    <Compile Include="Kinect\TextFields.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kinect\TextFields.Designer.cs">
+      <DependentUpon>TextFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kinect\writeNGE.cs" />
+    <Compile Include="Math\ArrayUtil.cs" />
+    <Compile Include="Math\BezierSpline.cs" />
+    <Compile Include="Math\CubicSpline.cs" />
+    <Compile Include="Math\ExtendedMathFunctions.cs" />
+    <Compile Include="Math\LagrangianCurveFitting.cs" />
+    <Compile Include="Math\LstSquQuadRegr.cs" />
+    <Compile Include="Math\MathTools.cs" />
+    <Compile Include="Math\MatrixLibrary\CholeskyDecomposition.cs" />
+    <Compile Include="Math\MatrixLibrary\EigenvalueDecomposition.cs" />
+    <Compile Include="Math\MatrixLibrary\LUDecomposition.cs" />
+    <Compile Include="Math\MatrixLibrary\Maths.cs" />
+    <Compile Include="Math\MatrixLibrary\Matrix.cs" />
+    <Compile Include="Math\MatrixLibrary\QRDecomposition.cs" />
+    <Compile Include="Math\MatrixLibrary\SingularValueDecomposition.cs" />
+    <Compile Include="Math\NumericComparer.cs" />
+    <Compile Include="Math\SavitzkyGolayFilter.cs" />
+    <Compile Include="Math\TriDiagonalMatrix.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Boneyard\frmConnection_Details.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmConnection_Details.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Boneyard\frmCommand.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmCommand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iRobot\frmConfig.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iRobot\frmDrive.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmDrive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iRobot\frmMenu.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iRobot\frmPacket.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmPacket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Boneyard\frmGraph.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmGraph.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Boneyard\frmLEDs.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmLEDs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Boneyard\frmMacro.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmMacro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Boneyard\frmVirtual.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmVirtual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KinectCtrl.resx">
+      <DependentUpon>KinectCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kinect\KinectCtrl.resx">
+      <DependentUpon>KinectCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kinect\KinectMainWindowForm.resx">
+      <DependentUpon>KinectMainWindowForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kinect\TextFields.resx">
+      <DependentUpon>TextFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iRobot\frmSensors.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmSensors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iRobot\frmStart.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmStart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Boneyard\frmStatistics.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmStatistics.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="iRobotKinect_TemporaryKey.pfx" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="iRobot\RoombaUI.cs" />
+    <Compile Include="iRobot\frmSensors.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iRobot\frmSensors.Designer.cs">
+      <DependentUpon>frmSensors.cs</DependentUpon>
+    </Compile>
+    <Compile Include="iRobot\frmStart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iRobot\frmStart.Designer.cs">
+      <DependentUpon>frmStart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Boneyard\frmStatistics.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boneyard\frmStatistics.Designer.cs">
+      <DependentUpon>frmStatistics.cs</DependentUpon>
+    </Compile>
+    <Compile Include="iRobot\Statistics.cs" />
+    <Compile Include="Boneyard\TestRunner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boneyard\TestRunner.Designer.cs">
+      <DependentUpon>TestRunner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="iRobot\Timer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Logging\Logging.csproj">
+      <Project>{01ea56ad-ded5-43f5-a41f-da40b0c9bc85}</Project>
+      <Name>Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RoombaSCI\RoombaSCI.csproj">
+      <Project>{54d50a76-844a-42ec-9393-60bad2f7c4bb}</Project>
+      <Name>RoombaSCI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Visual.C++.11.0.x86">
+      <Visible>False</Visible>
+      <ProductName>Visual C++ 2012 Runtime Libraries %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="KinectFusion\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="opencv_core231.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="opencv_highgui231.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="opencv_imgproc231.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Roomba.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="Microsoft.Kinect">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.Speech">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
