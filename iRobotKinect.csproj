@@ -72,25 +72,14 @@
     <ApplicationIcon>Roomba.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Emgu.CV, Version=2.3.0.1416, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\KinectWinforms\Emgu.CV.dll</HintPath>
+    <Reference Include="Emgu.CV">
+      <HintPath>.\Emgu.CV.dll</HintPath>
     </Reference>
-    <Reference Include="Emgu.CV.UI, Version=2.3.0.1416, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\KinectWinforms\Emgu.CV.UI.dll</HintPath>
+    <Reference Include="Emgu.CV.UI">
+      <HintPath>.\Emgu.CV.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Emgu.Util, Version=2.3.0.1416, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\KinectWinforms\Emgu.Util.dll</HintPath>
-    </Reference>
-    <Reference Include="LightBuzz.Vitruvius, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\LightBuzz.Vitruvius\bin\Debug\LightBuzz.Vitruvius.dll</HintPath>
-    </Reference>
-    <Reference Include="LightBuzz.Vitruvius.WinForms, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\LightBuzz.Vitruvius.WinForms\bin\Debug\LightBuzz.Vitruvius.WinForms.dll</HintPath>
+    <Reference Include="Emgu.Util">
+      <HintPath>.\Emgu.Util.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Kinect, Version=1.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Kinect.Toolkit, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -100,10 +89,6 @@
     <Reference Include="Microsoft.Kinect.Toolkit.Fusion, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Program Files\Microsoft SDKs\Kinect\Developer Toolkit v1.8.0\Samples\C#\Microsoft.Kinect.Toolkit.Fusion\bin\Debug\Microsoft.Kinect.Toolkit.Fusion.dll</HintPath>
-    </Reference>
-    <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\bin\Debug\OpenTK.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
@@ -227,6 +212,11 @@
       <DependentUpon>TextFields.cs</DependentUpon>
     </Compile>
     <Compile Include="Kinect\writeNGE.cs" />
+    <Compile Include="LightBuzz.Vitruvius.WinForms\ColorExtensions.cs" />
+    <Compile Include="LightBuzz.Vitruvius.WinForms\DepthExtensions.cs" />
+    <Compile Include="LightBuzz.Vitruvius.WinForms\ImageExtensions.cs" />
+    <Compile Include="LightBuzz.Vitruvius\SensorExtensions.cs" />
+    <Compile Include="LightBuzz.Vitruvius\SkeletonExtensions.cs" />
     <Compile Include="Math\ArrayUtil.cs" />
     <Compile Include="Math\BezierSpline.cs" />
     <Compile Include="Math\CubicSpline.cs" />
@@ -246,6 +236,13 @@
     <Compile Include="Math\TriDiagonalMatrix.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoombaSCI\Macro.cs" />
+    <Compile Include="RoombaSCI\Roomba.cs" />
+    <Compile Include="RoombaSCI\Roomba_Poller.cs" />
+    <Compile Include="RoombaSCI\Sensors.cs" />
+    <Compile Include="RoombaSCI\Timer.cs" />
+    <Compile Include="RoombaSCI\Types.cs" />
+    <Compile Include="Utilities\Log.cs" />
     <EmbeddedResource Include="Boneyard\frmConnection_Details.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmConnection_Details.cs</DependentUpon>
@@ -360,16 +357,6 @@
     <Compile Include="iRobot\Timer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Logging\Logging.csproj">
-      <Project>{01ea56ad-ded5-43f5-a41f-da40b0c9bc85}</Project>
-      <Name>Logging</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RoombaSCI\RoombaSCI.csproj">
-      <Project>{54d50a76-844a-42ec-9393-60bad2f7c4bb}</Project>
-      <Name>RoombaSCI</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
@@ -393,8 +380,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="KinectFusion\" />
+    <Folder Include="LightBuzz.Vitruvius\Gestures\" />
+    <Folder Include="LightBuzz.Vitruvius\Postures\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="config.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="opencv_core231.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

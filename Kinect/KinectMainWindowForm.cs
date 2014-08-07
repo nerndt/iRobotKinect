@@ -16,7 +16,7 @@ using System.Windows;
 using System.Windows.Media.Media3D;
 using System.Windows.Media.Imaging;
 
-using LightBuzz.Vitruvius;
+//using LightBuzz.Vitruvius;
 
 //Manuell hinzugefügt
 using Microsoft.Kinect;
@@ -484,7 +484,7 @@ namespace iRobotKinect
             }
 
             #region set FramesPerSecond
-            if (fpsEnd == 1)
+            if (fpsEnd == 1 && this.dropDown_fps.Text != ""SolidBrush )
             {
                 //FPS Suggestion. Bei niedrigen Frameraten werden empfangene Frames übersprungen (nicht angezeigt)
                 Int16 fps = Convert.ToInt16(this.dropDown_fps.Text);

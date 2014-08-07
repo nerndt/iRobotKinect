@@ -2,16 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iRobotKinect", "iRobotKinect.csproj", "{5E210056-14B4-4F61-B997-4A064339579F}"
-	ProjectSection(ProjectDependencies) = postProject
-		{01EA56AD-DED5-43F5-A41F-DA40B0C9BC85} = {01EA56AD-DED5-43F5-A41F-DA40B0C9BC85}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoombaSCI", "..\RoombaSCI\RoombaSCI.csproj", "{54D50A76-844A-42EC-9393-60BAD2F7C4BB}"
-	ProjectSection(ProjectDependencies) = postProject
-		{01EA56AD-DED5-43F5-A41F-DA40B0C9BC85} = {01EA56AD-DED5-43F5-A41F-DA40B0C9BC85}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logging", "..\Logging\Logging.csproj", "{01EA56AD-DED5-43F5-A41F-DA40B0C9BC85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,38 +35,6 @@ Global
 		{5E210056-14B4-4F61-B997-4A064339579F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5E210056-14B4-4F61-B997-4A064339579F}.Release|x64.ActiveCfg = Release|Any CPU
 		{5E210056-14B4-4F61-B997-4A064339579F}.Release|x86.ActiveCfg = Release|Any CPU
-		{54D50A76-844A-42EC-9393-60BAD2F7C4BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{54D50A76-844A-42EC-9393-60BAD2F7C4BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{54D50A76-844A-42EC-9393-60BAD2F7C4BB}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{54D50A76-844A-42EC-9393-60BAD2F7C4BB}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{54D50A76-844A-42EC-9393-60BAD2F7C4BB}.Documentation|Any CPU.ActiveCfg = Debug|Any CPU
-		{54D50A76-844A-42EC-9393-60BAD2F7C4BB}.Documentation|Any CPU.Build.0 = Debug|Any CPU
-		{54D50A76-844A-42EC-9393-60BAD2F7C4BB}.Documentation|x64.ActiveCfg = Debug|Any CPU
-		{54D50A76-844A-42EC-9393-60BAD2F7C4BB}.Documentation|x86.ActiveCfg = Debug|Any CPU
-		{54D50A76-844A-42EC-9393-60BAD2F7C4BB}.Nsis|Any CPU.ActiveCfg = Release|Any CPU
-		{54D50A76-844A-42EC-9393-60BAD2F7C4BB}.Nsis|Any CPU.Build.0 = Release|Any CPU
-		{54D50A76-844A-42EC-9393-60BAD2F7C4BB}.Nsis|x64.ActiveCfg = Release|Any CPU
-		{54D50A76-844A-42EC-9393-60BAD2F7C4BB}.Nsis|x86.ActiveCfg = Release|Any CPU
-		{54D50A76-844A-42EC-9393-60BAD2F7C4BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{54D50A76-844A-42EC-9393-60BAD2F7C4BB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{54D50A76-844A-42EC-9393-60BAD2F7C4BB}.Release|x64.ActiveCfg = Release|Any CPU
-		{54D50A76-844A-42EC-9393-60BAD2F7C4BB}.Release|x86.ActiveCfg = Release|Any CPU
-		{01EA56AD-DED5-43F5-A41F-DA40B0C9BC85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{01EA56AD-DED5-43F5-A41F-DA40B0C9BC85}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{01EA56AD-DED5-43F5-A41F-DA40B0C9BC85}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{01EA56AD-DED5-43F5-A41F-DA40B0C9BC85}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{01EA56AD-DED5-43F5-A41F-DA40B0C9BC85}.Documentation|Any CPU.ActiveCfg = Debug|Any CPU
-		{01EA56AD-DED5-43F5-A41F-DA40B0C9BC85}.Documentation|Any CPU.Build.0 = Debug|Any CPU
-		{01EA56AD-DED5-43F5-A41F-DA40B0C9BC85}.Documentation|x64.ActiveCfg = Debug|Any CPU
-		{01EA56AD-DED5-43F5-A41F-DA40B0C9BC85}.Documentation|x86.ActiveCfg = Debug|Any CPU
-		{01EA56AD-DED5-43F5-A41F-DA40B0C9BC85}.Nsis|Any CPU.ActiveCfg = Release|Any CPU
-		{01EA56AD-DED5-43F5-A41F-DA40B0C9BC85}.Nsis|Any CPU.Build.0 = Release|Any CPU
-		{01EA56AD-DED5-43F5-A41F-DA40B0C9BC85}.Nsis|x64.ActiveCfg = Release|Any CPU
-		{01EA56AD-DED5-43F5-A41F-DA40B0C9BC85}.Nsis|x86.ActiveCfg = Release|Any CPU
-		{01EA56AD-DED5-43F5-A41F-DA40B0C9BC85}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{01EA56AD-DED5-43F5-A41F-DA40B0C9BC85}.Release|Any CPU.Build.0 = Release|Any CPU
-		{01EA56AD-DED5-43F5-A41F-DA40B0C9BC85}.Release|x64.ActiveCfg = Release|Any CPU
-		{01EA56AD-DED5-43F5-A41F-DA40B0C9BC85}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Config_Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Polling>
+    <Sensors>true</Sensors>
+    <Frequency>500</Frequency>
+  </Polling>
+  <Sensors>
+    <IsCurrent_Threshold>300</IsCurrent_Threshold>
+  </Sensors>
+  <COMM>
+    <ConnectedTo>COM4</ConnectedTo>
+    <BaudRate>10</BaudRate>
+    <DataBits>8</DataBits>
+    <DTR_Enable>false</DTR_Enable>
+    <StopBits>One</StopBits>
+    <Handshake>None</Handshake>
+    <Parity>None</Parity>
+    <RTS_Enabled>false</RTS_Enabled>
+  </COMM>
+  <Forms>
+    <StartForm>
+      <LastUpdated_DisplayLag>25</LastUpdated_DisplayLag>
+      <FormUpdated_DisplayLag>25</FormUpdated_DisplayLag>
+      <Battery_Check>true</Battery_Check>
+      <Timer>500</Timer>
+    </StartForm>
+    <DriveForm>
+      <Accurate_Sensor_Display>false</Accurate_Sensor_Display>
+    </DriveForm>
+  </Forms>
+  <Log>
+    <Path />
+    <RoombaUI>false</RoombaUI>
+    <LogSCICommands>false</LogSCICommands>
+    <Roomba_IO>true</Roomba_IO>
+    <Roomba_PacketData>false</Roomba_PacketData>
+    <Roomba_Poller>false</Roomba_Poller>
+    <StartForm>false</StartForm>
+    <DriveForm>false</DriveForm>
+    <StartForm_Timer>false</StartForm_Timer>
+    <StartForm_Charging>false</StartForm_Charging>
+  </Log>
+</Config_Settings>
