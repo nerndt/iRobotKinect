@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using Microsoft.Kinect;
 
-namespace LightBuzz.Vitruvius.WinForms
+namespace iRobotKinect.WinForms
 {
     /// <summary>
     /// Provides some common functionality for manipulating WinForms bitmap images.

@@ -16,7 +16,7 @@ using System.Windows;
 using System.Windows.Media.Media3D;
 using System.Windows.Media.Imaging;
 
-//using LightBuzz.Vitruvius;
+//using iRobotKinect;
 
 //Manuell hinzugefügt
 using Microsoft.Kinect;
@@ -38,7 +38,7 @@ namespace iRobotKinect
         /// Active Kinect sensor
         private KinectSensor sensor;
         private short fpsEnd = 1;
-        private writeNGE NGEFile;
+        private MyWrite NGEFile;
         Bitmap tempColorFrame;
         bool windowClosing = false;
         int initFrames = 1;
@@ -97,6 +97,8 @@ namespace iRobotKinect
         Bitmap depthBmp = null;
 
         private SpeechRecognizer mySpeechRecognizer;
+
+        private GestureController _gestureController;
 
         #endregion Private Fields
 
@@ -232,6 +234,10 @@ namespace iRobotKinect
                             this.mySpeechRecognizer.SaidSomething += this.RecognizerSaidSomething;
                             this.mySpeechRecognizer.Start(sensor.AudioSource);
                         }
+
+                        _gestureController = new GestureController(GestureType.All);
+                        _gestureController.GestureRecognized += GestureController_GestureRecognized;
+
 
                     }
                     catch (Exception)
@@ -592,7 +598,7 @@ namespace iRobotKinect
                         //ConvertDepthFrameData(sender, depthFrame);
 
                         DepthImagePixel[] depth = depthFrame.GetRawPixelData();
-                        pictureBox_colorPic.BackgroundImage = LightBuzz.Vitruvius.WinForms.DepthExtensions.ToBitmap(depthFrame, PixelFormat.Format32bppRgb, LightBuzz.Vitruvius.WinForms.DepthImageMode.Colors);
+                        pictureBox_colorPic.BackgroundImage = iRobotKinect.WinForms.DepthExtensions.ToBitmap(depthFrame, PixelFormat.Format32bppRgb, iRobotKinect.WinForms.DepthImageMode.Colors);
                     }
                 }
 
@@ -620,12 +626,14 @@ namespace iRobotKinect
                                 {
                                     if (skel.TrackingState == SkeletonTrackingState.Tracked)
                                     {
-                                        //Zeichne Skelett
                                         DrawSkeletons(tempSkeletonFrame, skel);
 
                                         if (skel != null)
                                         {
-                                            double height = LightBuzz.Vitruvius.SkeletonExtensions.Height(skel);
+                                            // Update skeleton gestures.
+                                            _gestureController.Update(skel);
+
+                                            double height = iRobotKinect.SkeletonExtensions.Height(skel);
                                         }
 
                                         if (NGEFile != null)
@@ -651,6 +659,8 @@ namespace iRobotKinect
                                     }
                                 }
                             }
+                            // Flip the bitmap
+                            tempSkeletonFrame = BitmapManipulator.MirrorXBitmap((Bitmap)tempSkeletonFrame);
                             this.pictureBox_skeleton.BackgroundImage = tempSkeletonFrame; // this.pictureBox_skeleton.Image = tempSkeletonFrame;
                             //this.pictureBox_skeleton.Image = new Bitmap(tempSkeletonFrame, this.pictureBox_skeleton.Width, this.pictureBox_skeleton.Height);
                         }
@@ -824,7 +834,7 @@ namespace iRobotKinect
                 this.textBox_sensorStatus.BackColor = Color.Yellow;
                 DateTime thisDay = DateTime.UtcNow;
                 string txtFileName = thisDay.ToString("dd.MM.yyyy_HH.mm");
-                NGEFile = new writeNGE(txtFileName);
+                NGEFile = new MyWrite(txtFileName);
                 NGEFile.setTextFeld(textFields1);
             }
         }
@@ -996,7 +1006,7 @@ namespace iRobotKinect
         {
             if (NGEFile != null)
             {
-                NGEFile.closeNGEFile();
+                NGEFile.MyCloseFile();
                 this.textBox_sensorStatus.Text = "Recording captured";
                 this.textBox_sensorStatus.BackColor = Color.White;
                 NGEFile = null;
@@ -2276,6 +2286,52 @@ namespace iRobotKinect
 
         #endregion Kinect Speech processing
 
+        #region Kinect Gesture processing
+        void GestureController_GestureRecognized(object sender, GestureEventArgs e)
+        {
+            // Display the gesture type.
+            Program.UI.StartForm.labelGestureCommand.Text = e.Name;
+            // NGE08082014 !!!!!!! tblGestures.Text = e.Name;
+
+            // Do something according to the type of the gesture.
+            switch (e.Type)
+            {
+                case GestureType.JoinedHands:
+                   Program.UI.DriveForm.HandleKeys(Keys.Space);
+                    break;
+                case GestureType.Menu:
+                   Program.UI.DriveForm.HandleKeys(Keys.Space);
+                    break;
+                case GestureType.SwipeDown:
+                   Program.UI.DriveForm.HandleKeys(Keys.Space);
+                    break;
+                case GestureType.SwipeLeft:
+                    Program.UI.DriveForm.HandleKeys(Keys.Left);
+                    break;
+                case GestureType.SwipeRight:
+                    Program.UI.DriveForm.HandleKeys(Keys.Right);
+                    break;
+                case GestureType.SwipeUp:
+                    Program.UI.DriveForm.HandleKeys(Keys.Up);
+                   break;
+                case GestureType.WaveLeft:
+                    Program.UI.DriveForm.HandleKeys(Keys.Left);
+                    break;
+                case GestureType.WaveRight:
+                    Program.UI.DriveForm.HandleKeys(Keys.Right);
+                    break;
+                case GestureType.ZoomIn:
+                    Program.UI.DriveForm.HandleKeys(Keys.Up);
+                    break;
+                case GestureType.ZoomOut:
+                     Program.UI.DriveForm.HandleKeys(Keys.Down);
+                    break;
+                default:
+                    break;
+            }
+        }
+        #endregion Kinect Gesture processing
+    
     }
 
     #region Image Utils

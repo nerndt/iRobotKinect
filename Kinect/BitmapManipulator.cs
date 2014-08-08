@@ -775,6 +775,18 @@ namespace iRobotKinect
             return bmp;
         }
 
+        public static Bitmap MirrorXBitmap(Bitmap inputBmp) // RotateNoneFlipY
+        {
+            //Copy bitmap
+            Bitmap newBmp = (Bitmap)inputBmp.Clone();
+
+            newBmp.RotateFlip(RotateFlipType.RotateNoneFlipX);
+
+            //The RotateFlip transformation converts bitmaps to memoryBmp,
+            //which is uncool.  Convert back now
+            return ConvertBitmap(newBmp, inputBmp.RawFormat);
+        }
+
         public static Bitmap RotateFlipBitmap(Bitmap inputBmp, RotateFlipType flipType) // RotateNoneFlipY
         {
             //Copy bitmap

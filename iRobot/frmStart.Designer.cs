@@ -130,6 +130,8 @@ namespace iRobotKinect
             this.buttonExit = new System.Windows.Forms.Button();
             this.labelSpeech = new System.Windows.Forms.Label();
             this.labelSpeechCommand = new System.Windows.Forms.Label();
+            this.labelGesture = new System.Windows.Forms.Label();
+            this.labelGestureCommand = new System.Windows.Forms.Label();
             this.cmConnectionMenu.SuspendLayout();
             this.tabStart.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -1037,6 +1039,26 @@ namespace iRobotKinect
             this.labelSpeechCommand.TabIndex = 328;
             this.labelSpeechCommand.Text = "None";
             // 
+            // labelGesture
+            // 
+            this.labelGesture.AutoSize = true;
+            this.labelGesture.Location = new System.Drawing.Point(730, 6);
+            this.labelGesture.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelGesture.Name = "labelGesture";
+            this.labelGesture.Size = new System.Drawing.Size(97, 13);
+            this.labelGesture.TabIndex = 327;
+            this.labelGesture.Text = "Gesture Command:";
+            // 
+            // labelGestureCommand
+            // 
+            this.labelGestureCommand.AutoSize = true;
+            this.labelGestureCommand.Location = new System.Drawing.Point(831, 6);
+            this.labelGestureCommand.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelGestureCommand.Name = "labelGestureCommand";
+            this.labelGestureCommand.Size = new System.Drawing.Size(33, 13);
+            this.labelGestureCommand.TabIndex = 328;
+            this.labelGestureCommand.Text = "None";
+            // 
             // frmStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1046,6 +1068,8 @@ namespace iRobotKinect
             this.ControlBox = false;
             this.Controls.Add(this.labelSpeechCommand);
             this.Controls.Add(this.labelSpeech);
+            this.Controls.Add(this.labelGestureCommand);
+            this.Controls.Add(this.labelGesture);
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.lblFormUpdated);
             this.Controls.Add(this.label3);
@@ -1067,6 +1091,8 @@ namespace iRobotKinect
             this.Controls.SetChildIndex(this.buttonExit, 0);
             this.Controls.SetChildIndex(this.labelSpeech, 0);
             this.Controls.SetChildIndex(this.labelSpeechCommand, 0);
+            this.Controls.SetChildIndex(this.labelGesture, 0);
+            this.Controls.SetChildIndex(this.labelGestureCommand, 0);
             this.cmConnectionMenu.ResumeLayout(false);
             this.tabStart.ResumeLayout(false);
             this.tabStart.PerformLayout();
@@ -1185,5 +1211,7 @@ namespace iRobotKinect
         private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.Label labelSpeech;
         public System.Windows.Forms.Label labelSpeechCommand;
+        private System.Windows.Forms.Label labelGesture;
+        public System.Windows.Forms.Label labelGestureCommand;
     }
 }

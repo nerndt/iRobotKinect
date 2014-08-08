@@ -308,6 +308,11 @@ namespace iRobotKinect
 
         private void LoadForm()
         {
+            if (this.DesignMode)
+            {
+                return;
+            }
+
             //this.Location = new Point(2000, 0); // NGE07152014 Make it off screen // this.Location = new Point(0, 0); // Put Startup form in top left of screen
             this.Location = new Point(0, 0); // NGE07152014 Make it off screen // this.Location = new Point(0, 0); // Put Startup form in top left of screen
 
@@ -527,6 +532,7 @@ namespace iRobotKinect
             //}
 
         }
+        
         public void _Stop(bool bUpdate_Indicator, bool bDestroyRoombaObj)
         {
             loadToolStripMenuItem.Enabled = false; //Load Macro
@@ -549,6 +555,7 @@ namespace iRobotKinect
 
             GC.Collect();
         }
+        
         public void _Suspend()
         {
             if (Program.UI.CurrentRoomba.Automatic_Polling) { Program.UI.CurrentRoomba.Automatic_Polling = false; };
@@ -616,6 +623,7 @@ namespace iRobotKinect
                 }
             }
         }
+        
         public void Check_Roomba_Object()
         {
             if (Program.UI.CurrentRoomba.New_State)
@@ -706,6 +714,7 @@ namespace iRobotKinect
                 this.lblMacroExecuting.Enabled = true;
             }
         }
+        
         private void ExecuteFlasher(bool bExecuting)
         {
             if (bExecuting)
@@ -759,6 +768,7 @@ namespace iRobotKinect
                 Log.This("Macro Recording " + Program.UI.CurrentRoomba.Macro.Recording.ToString(), this.Name, Program.UI.Config.Log.StartForm);
             }
         }
+        
         private void ToggleExecuteMacro()
         {
             //If path & everything else is set up, then toggle Recording
@@ -805,6 +815,7 @@ namespace iRobotKinect
                 this.lblChargeState.BackColor = Color.Transparent;
             }
         }
+        
         private void PluggedIn(bool bPluggedIn, bool noFlash)
         {
             if (bPluggedIn)
@@ -852,6 +863,7 @@ namespace iRobotKinect
                 this.RecordFlasher(false);
             }
         }
+        
         private void Check_If_Executing()
         {
             if (Program.UI.CurrentRoomba.Macro != null)

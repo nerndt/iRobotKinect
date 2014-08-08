@@ -48,10 +48,10 @@ namespace iRobotKinect
 
         #region Member variables
 
-        public static int m_iDefaultCurrentSpeed = 20;
-        public static int m_iDefaultCurrentRotationSpeed = 20;
+        public static int m_iDefaultCurrentSpeed = 60; // Was 20 but too slow
+        public static int m_iDefaultCurrentRotationSpeed = 40; // Was 20 but too slow
         private int m_iCurrentSpeed = 0;
-        private int m_iCurrentRotationSpeed = 20;
+        private int m_iCurrentRotationSpeed = 40; // Was 20 but too slow
         private int m_iCurrentAngle = 32768;
         private bool m_bCurrentRotationDirectionPositive = true;
             

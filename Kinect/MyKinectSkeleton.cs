@@ -10,42 +10,41 @@ using System.Windows.Media.Media3D;
 
 namespace iRobotKinect
 {
-    class KinectSkeletonNGE
+    class MyKinectSkeleton
     {
-
-        public static void AddKinectSkeleton(NGESkeleton Skeleton)
+        public static void AddKinectSkeleton(MySkeleton Skeleton)
         {
             //Die Person steht falsch herum im Koordinatensystem der Kinect! Es wird erst beim Abspeichern korrigiert, weshalb die Verarbeitung noch mit umgekehrten Koordinaten erfolgt
-            NGEBone hipCenter = new NGEBone(null, JointType.HipCenter.ToString(), 6, TransAxis.None, true);
-            NGEBone hipCenter2 = new NGEBone(hipCenter, "HipCenter2", 3, TransAxis.Y, false);
-            NGEBone spine = new NGEBone(hipCenter2, JointType.Spine.ToString(), 3, TransAxis.Y, true);
-            NGEBone shoulderCenter = new NGEBone(spine, JointType.ShoulderCenter.ToString(), 3, TransAxis.Y, true);
+            MyBone hipCenter = new MyBone(null, JointType.HipCenter.ToString(), 6, TransAxis.None, true);
+            MyBone hipCenter2 = new MyBone(hipCenter, "HipCenter2", 3, TransAxis.Y, false);
+            MyBone spine = new MyBone(hipCenter2, JointType.Spine.ToString(), 3, TransAxis.Y, true);
+            MyBone shoulderCenter = new MyBone(spine, JointType.ShoulderCenter.ToString(), 3, TransAxis.Y, true);
 
-            NGEBone collarLeft = new NGEBone(shoulderCenter, "CollarLeft", 3, TransAxis.X, false);
-            NGEBone shoulderLeft = new NGEBone(collarLeft, JointType.ShoulderLeft.ToString(), 3, TransAxis.X, true);
-            NGEBone elbowLeft = new NGEBone(shoulderLeft, JointType.ElbowLeft.ToString(), 3, TransAxis.X, true);
-            NGEBone wristLeft = new NGEBone(elbowLeft, JointType.WristLeft.ToString(), 3, TransAxis.X, true);
-            NGEBone handLeft = new NGEBone(wristLeft, JointType.HandLeft.ToString(), 0, TransAxis.X, true);
+            MyBone collarLeft = new MyBone(shoulderCenter, "CollarLeft", 3, TransAxis.X, false);
+            MyBone shoulderLeft = new MyBone(collarLeft, JointType.ShoulderLeft.ToString(), 3, TransAxis.X, true);
+            MyBone elbowLeft = new MyBone(shoulderLeft, JointType.ElbowLeft.ToString(), 3, TransAxis.X, true);
+            MyBone wristLeft = new MyBone(elbowLeft, JointType.WristLeft.ToString(), 3, TransAxis.X, true);
+            MyBone handLeft = new MyBone(wristLeft, JointType.HandLeft.ToString(), 0, TransAxis.X, true);
 
-            NGEBone neck = new NGEBone(shoulderCenter, "Neck", 3, TransAxis.Y, false);
-            NGEBone head = new NGEBone(neck, JointType.Head.ToString(), 3, TransAxis.Y, true);
-            NGEBone headtop = new NGEBone(head, "Headtop", 0, TransAxis.None, false);
+            MyBone neck = new MyBone(shoulderCenter, "Neck", 3, TransAxis.Y, false);
+            MyBone head = new MyBone(neck, JointType.Head.ToString(), 3, TransAxis.Y, true);
+            MyBone headtop = new MyBone(head, "Headtop", 0, TransAxis.None, false);
 
-            NGEBone collarRight = new NGEBone(shoulderCenter, "CollarRight", 3, TransAxis.nX, false);
-            NGEBone shoulderRight = new NGEBone(collarRight, JointType.ShoulderRight.ToString(), 3, TransAxis.nX, true);
-            NGEBone elbowRight = new NGEBone(shoulderRight, JointType.ElbowRight.ToString(), 3, TransAxis.nX, true);
-            NGEBone wristRight = new NGEBone(elbowRight, JointType.WristRight.ToString(), 3, TransAxis.nX, true);
-            NGEBone handRight = new NGEBone(wristRight, JointType.HandRight.ToString(), 0, TransAxis.nX, true);
+            MyBone collarRight = new MyBone(shoulderCenter, "CollarRight", 3, TransAxis.nX, false);
+            MyBone shoulderRight = new MyBone(collarRight, JointType.ShoulderRight.ToString(), 3, TransAxis.nX, true);
+            MyBone elbowRight = new MyBone(shoulderRight, JointType.ElbowRight.ToString(), 3, TransAxis.nX, true);
+            MyBone wristRight = new MyBone(elbowRight, JointType.WristRight.ToString(), 3, TransAxis.nX, true);
+            MyBone handRight = new MyBone(wristRight, JointType.HandRight.ToString(), 0, TransAxis.nX, true);
 
-            NGEBone hipLeft = new NGEBone(hipCenter, JointType.HipLeft.ToString(), 3, TransAxis.X, true);
-            NGEBone kneeLeft = new NGEBone(hipLeft, JointType.KneeLeft.ToString(), 3, TransAxis.nY, true);
-            NGEBone ankleLeft = new NGEBone(kneeLeft, JointType.AnkleLeft.ToString(), 3, TransAxis.nY, true);
-            NGEBone footLeft = new NGEBone(ankleLeft, JointType.FootLeft.ToString(), 0, TransAxis.Z, true);
+            MyBone hipLeft = new MyBone(hipCenter, JointType.HipLeft.ToString(), 3, TransAxis.X, true);
+            MyBone kneeLeft = new MyBone(hipLeft, JointType.KneeLeft.ToString(), 3, TransAxis.nY, true);
+            MyBone ankleLeft = new MyBone(kneeLeft, JointType.AnkleLeft.ToString(), 3, TransAxis.nY, true);
+            MyBone footLeft = new MyBone(ankleLeft, JointType.FootLeft.ToString(), 0, TransAxis.Z, true);
 
-            NGEBone hipRight = new NGEBone(hipCenter, JointType.HipRight.ToString(), 3, TransAxis.nX, true);
-            NGEBone kneeRight = new NGEBone(hipRight, JointType.KneeRight.ToString(), 3, TransAxis.nY, true);
-            NGEBone ankleRight = new NGEBone(kneeRight, JointType.AnkleRight.ToString(), 3, TransAxis.nY, true);
-            NGEBone footRight = new NGEBone(ankleRight, JointType.FootRight.ToString(), 0, TransAxis.Z, true);
+            MyBone hipRight = new MyBone(hipCenter, JointType.HipRight.ToString(), 3, TransAxis.nX, true);
+            MyBone kneeRight = new MyBone(hipRight, JointType.KneeRight.ToString(), 3, TransAxis.nY, true);
+            MyBone ankleRight = new MyBone(kneeRight, JointType.AnkleRight.ToString(), 3, TransAxis.nY, true);
+            MyBone footRight = new MyBone(ankleRight, JointType.FootRight.ToString(), 0, TransAxis.Z, true);
 
             Skeleton.AddBone(hipCenter);
             Skeleton.AddBone(hipCenter2);
@@ -73,7 +72,7 @@ namespace iRobotKinect
             Skeleton.AddBone(ankleRight);
             Skeleton.AddBone(footRight);
 
-            Skeleton.FinalizeNGESkeleton();
+            Skeleton.FinalizeMySkeleton();
         }
 
         public static JointType String2JointType(string boneName)
@@ -82,7 +81,7 @@ namespace iRobotKinect
             return value;
         }
 
-        public static JointType getJointTypeFromNGEBone(NGEBone bone)
+        public static JointType getJointTypeFromMyBone(MyBone bone)
         {
             JointType kinectJoint = new JointType();
 
@@ -158,7 +157,7 @@ namespace iRobotKinect
             return kinectJoint;
         }
 
-        public static double[] getEulerFromBone(NGEBone bone, Skeleton skel)
+        public static double[] getEulerFromBone(MyBone bone, Skeleton skel)
         {
             double[] degVec = new double[3] { 0, 0, 0 };
             double[] correctionDegVec = new double[3] { 0, 0, 0 };
@@ -166,10 +165,8 @@ namespace iRobotKinect
             JointType ParentKinectJoint = new JointType();
             bool noData = false;
 
-            kinectJoint = getJointTypeFromNGEBone(bone);
-            
-
-
+            kinectJoint = getJointTypeFromMyBone(bone);
+           
             switch (bone.Name)
             {
                 case "HipCenter2":
@@ -427,7 +424,7 @@ namespace iRobotKinect
             return degVec;
         }
 
-        public static double[] getBoneVectorOutofJointPosition(NGEBone NGEBone, Skeleton skel)
+        public static double[] getBoneVectorOutofJointPosition(MyBone NGEBone, Skeleton skel)
         {
             double[] boneVector = new double[3] { 0, 0, 0 };
             double[] boneVectorParent = new double[3] { 0, 0, 0 };
@@ -442,7 +439,7 @@ namespace iRobotKinect
             {
                 if (NGEBone.IsKinectJoint == true)
                 {
-                    Joint = KinectSkeletonNGE.String2JointType(boneName);
+                    Joint = MyKinectSkeleton.String2JointType(boneName);
 
                     boneVector[0] = skel.Joints[Joint].Position.X;
                     boneVector[1] = skel.Joints[Joint].Position.Y;
@@ -450,11 +447,11 @@ namespace iRobotKinect
 
                     try
                     {
-                        Joint = KinectSkeletonNGE.String2JointType(NGEBone.Parent.Name);
+                        Joint = MyKinectSkeleton.String2JointType(NGEBone.Parent.Name);
                     }
                     catch
                     {
-                        Joint = KinectSkeletonNGE.String2JointType(NGEBone.Parent.Parent.Name);
+                        Joint = MyKinectSkeleton.String2JointType(NGEBone.Parent.Parent.Name);
                     }
 
                     boneVector[0] -= skel.Joints[Joint].Position.X;
@@ -465,7 +462,5 @@ namespace iRobotKinect
 
             return boneVector;
         }
-
-
     }
 }

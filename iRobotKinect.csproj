@@ -28,8 +28,8 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>9</ApplicationRevision>
-    <ApplicationVersion>0.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>0.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -209,10 +209,10 @@
     <Compile Include="Kinect\KinectMainWindowForm.Designer.cs">
       <DependentUpon>KinectMainWindowForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Kinect\KinectSkeletonNGE.cs" />
+    <Compile Include="Kinect\MyKinectSkeleton.cs" />
     <Compile Include="Kinect\LockBitmap.cs" />
     <Compile Include="Kinect\MathHelper.cs" />
-    <Compile Include="Kinect\NGE.cs" />
+    <Compile Include="Kinect\MyUtils.cs" />
     <Compile Include="Kinect\PointCloud.cs" />
     <Compile Include="Kinect\ScreenSpaceLines3D.cs" />
     <Compile Include="Kinect\SpeechRecognizer.cs" />
@@ -222,10 +222,29 @@
     <Compile Include="Kinect\TextFields.Designer.cs">
       <DependentUpon>TextFields.cs</DependentUpon>
     </Compile>
-    <Compile Include="Kinect\writeNGE.cs" />
+    <Compile Include="Kinect\MyWrite.cs" />
     <Compile Include="LightBuzz.Vitruvius.WinForms\ColorExtensions.cs" />
     <Compile Include="LightBuzz.Vitruvius.WinForms\DepthExtensions.cs" />
     <Compile Include="LightBuzz.Vitruvius.WinForms\ImageExtensions.cs" />
+    <Compile Include="LightBuzz.Vitruvius\GestureController.cs" />
+    <Compile Include="LightBuzz.Vitruvius\Gestures\Gesture.cs" />
+    <Compile Include="LightBuzz.Vitruvius\Gestures\GestureEventArgs.cs" />
+    <Compile Include="LightBuzz.Vitruvius\Gestures\GesturePartResult.cs" />
+    <Compile Include="LightBuzz.Vitruvius\Gestures\GestureType.cs" />
+    <Compile Include="LightBuzz.Vitruvius\Gestures\IGestureSegment.cs" />
+    <Compile Include="LightBuzz.Vitruvius\Gestures\JoinedHandsSegment.cs" />
+    <Compile Include="LightBuzz.Vitruvius\Gestures\MenuSegments.cs" />
+    <Compile Include="LightBuzz.Vitruvius\Gestures\SwipeDownSegment1.cs" />
+    <Compile Include="LightBuzz.Vitruvius\Gestures\SwipeDownSegment2.cs" />
+    <Compile Include="LightBuzz.Vitruvius\Gestures\SwipeDownSegment3.cs" />
+    <Compile Include="LightBuzz.Vitruvius\Gestures\SwipeLeftSegments.cs" />
+    <Compile Include="LightBuzz.Vitruvius\Gestures\SwipeRightSegments.cs" />
+    <Compile Include="LightBuzz.Vitruvius\Gestures\SwipeUpSegment1.cs" />
+    <Compile Include="LightBuzz.Vitruvius\Gestures\SwipeUpSegment2.cs" />
+    <Compile Include="LightBuzz.Vitruvius\Gestures\SwipeUpSegment3.cs" />
+    <Compile Include="LightBuzz.Vitruvius\Gestures\WaveLeftSegments.cs" />
+    <Compile Include="LightBuzz.Vitruvius\Gestures\WaveRightSegments.cs" />
+    <Compile Include="LightBuzz.Vitruvius\Gestures\ZoomSegments.cs" />
     <Compile Include="LightBuzz.Vitruvius\SensorExtensions.cs" />
     <Compile Include="LightBuzz.Vitruvius\SkeletonExtensions.cs" />
     <Compile Include="Math\ArrayUtil.cs" />
@@ -391,7 +410,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="KinectFusion\" />
-    <Folder Include="LightBuzz.Vitruvius\Gestures\" />
     <Folder Include="LightBuzz.Vitruvius\Postures\" />
   </ItemGroup>
   <ItemGroup>

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LightBuzz.Vitruvius
+namespace iRobotKinect
 {
     /// <summary>
     /// Provides some common functionality applied to a Kinect sensor.

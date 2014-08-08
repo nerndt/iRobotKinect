@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace LightBuzz.Vitruvius
+namespace iRobotKinect
 {
     /// <summary>
     /// Provides some common functionality for manupulating skeletal data.

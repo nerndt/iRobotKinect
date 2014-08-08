@@ -11,7 +11,7 @@ using Microsoft.Kinect;
 
 namespace iRobotKinect 
 {
-    class writeNGE
+    class MyWrite
     {
         private bool recording = false;
         StreamWriter file;
@@ -25,19 +25,19 @@ namespace iRobotKinect
         private double avgFrameRate = 0;
         private double elapsedTimeSec = 0;
 
-        NGESkeleton NGESkeleton = new NGESkeleton();
-        NGESkeleton NGESkeletonWritten = new NGESkeleton();
+        MySkeleton mySkeleton = new MySkeleton();
+        MySkeleton mySkeletonWritten = new MySkeleton();
         double[,] tempOffsetMatrix;
-        double[] tempMotionVektor;
+        double[] tempMotionVector;
 
-        public writeNGE(string fileName)
+        public MyWrite(string fileName)
         {
             fileName = fileName + ".NGE";
             this.fileName = fileName;
-            KinectSkeletonNGE.AddKinectSkeleton(NGESkeleton);
+            MyKinectSkeleton.AddKinectSkeleton(mySkeleton);
             initializing = true;
-            tempOffsetMatrix = new double[3, NGESkeleton.Bones.Count];
-            tempMotionVektor = new double[NGESkeleton.Channels];
+            tempOffsetMatrix = new double[3, mySkeleton.Bones.Count];
+            tempMotionVector = new double[mySkeleton.Channels];
 
             if (File.Exists(fileName))
                 File.Delete(fileName);
@@ -51,7 +51,7 @@ namespace iRobotKinect
             textFeld = feld;
         }
 
-        public void closeNGEFile()
+        public void MyCloseFile()
         {
             sw.Stop(); // Recording beendet
             file.Flush();
@@ -73,13 +73,12 @@ namespace iRobotKinect
             get { return initializing; }
         }
 
-        //actual paperwork:
         public void Entry(Skeleton skel)
         {
             this.intializingCounter++; 
-                for (int k = 0; k < NGESkeleton.Bones.Count; k++)
+                for (int k = 0; k < mySkeleton.Bones.Count; k++)
                 {
-                        double[] bonevector = KinectSkeletonNGE.getBoneVectorOutofJointPosition(NGESkeleton.Bones[k], skel);{
+                        double[] bonevector = MyKinectSkeleton.getBoneVectorOutofJointPosition(mySkeleton.Bones[k], skel);{
                         if (this.intializingCounter == 1)
                         {
                             tempOffsetMatrix[0, k] = Math.Round(bonevector[0] * 100, 2);
@@ -98,39 +97,37 @@ namespace iRobotKinect
 
         public void startWritingEntry()
         {          
-            for (int k = 0; k < NGESkeleton.Bones.Count; k++)
+            for (int k = 0; k < mySkeleton.Bones.Count; k++)
             {
                 //double length = Math.Sqrt(Math.Pow(Math.Round(tempOffsetMatrix[0, k] , 5),2) + Math.Pow(Math.Round(tempOffsetMatrix[1, k] , 5),2) + Math.Pow(Math.Round(tempOffsetMatrix[2, k] , 5),2));  
                 double length = Math.Max(Math.Abs(tempOffsetMatrix[0, k]), Math.Abs(tempOffsetMatrix[1, k]));
                 length = Math.Max(length, Math.Abs(tempOffsetMatrix[2, k]));
                 length = Math.Round(length, 2);
 
-                switch(NGESkeleton.Bones[k].Axis)
+                switch(mySkeleton.Bones[k].Axis)
                 {
                         case TransAxis.X :
-                        NGESkeleton.Bones[k].setTransOffset(length, 0, 0);
+                        mySkeleton.Bones[k].setTransOffset(length, 0, 0);
                         break;
                         case TransAxis.Y :
-                        NGESkeleton.Bones[k].setTransOffset(0, length, 0);
+                        mySkeleton.Bones[k].setTransOffset(0, length, 0);
                         break;
                         case TransAxis.Z :
-                        NGESkeleton.Bones[k].setTransOffset(0, 0, length);
+                        mySkeleton.Bones[k].setTransOffset(0, 0, length);
                         break;
                         case TransAxis.nX :
-                        NGESkeleton.Bones[k].setTransOffset(-length, 0, 0);
+                        mySkeleton.Bones[k].setTransOffset(-length, 0, 0);
                         break;
                         case TransAxis.nY :
-                        NGESkeleton.Bones[k].setTransOffset(0, -length, 0);
+                        mySkeleton.Bones[k].setTransOffset(0, -length, 0);
                         break;
                         case TransAxis.nZ :
-                        NGESkeleton.Bones[k].setTransOffset(0, 0, -length);
+                        mySkeleton.Bones[k].setTransOffset(0, 0, -length);
                         break;
 
                     default :
-                        NGESkeleton.Bones[k].setTransOffset(tempOffsetMatrix[0, k], tempOffsetMatrix[1, k], tempOffsetMatrix[2, k]);
-                        break;
-                
-
+                        mySkeleton.Bones[k].setTransOffset(tempOffsetMatrix[0, k], tempOffsetMatrix[1, k], tempOffsetMatrix[2, k]);
+                        break;               
                 }      
             }      
 
@@ -141,23 +138,23 @@ namespace iRobotKinect
 
         private void writeEntry()
         {
-            List<List<NGEBone>> bonesListList = new List<List<NGEBone>>();
-            List<NGEBone> resultList;
+            List<List<MyBone>> bonesListList = new List<List<MyBone>>();
+            List<MyBone> resultList;
 
-            while (NGESkeleton.Bones.Count != 0)
+            while (mySkeleton.Bones.Count != 0)
             {
-                if (NGESkeletonWritten.Bones.Count == 0)
+                if (mySkeletonWritten.Bones.Count == 0)
                 {
-                    resultList = NGESkeleton.Bones.FindAll(i => i.Root == true);
+                    resultList = mySkeleton.Bones.FindAll(i => i.Root == true);
                     bonesListList.Add(resultList);
                 }
                 else
                 {
-                    if (NGESkeletonWritten.Bones.Last().End == false)
+                    if (mySkeletonWritten.Bones.Last().End == false)
                     {
-                        for (int k = 1; k <= NGESkeletonWritten.Bones.Count; k++)
+                        for (int k = 1; k <= mySkeletonWritten.Bones.Count; k++)
                         {
-                            resultList = NGESkeletonWritten.Bones[NGESkeletonWritten.Bones.Count - k].Children;
+                            resultList = mySkeletonWritten.Bones[mySkeletonWritten.Bones.Count - k].Children;
                             if (resultList.Count != 0)
                             {
                                 bonesListList.Add(resultList);
@@ -167,7 +164,7 @@ namespace iRobotKinect
                     }
                 }
 
-                NGEBone currentBone = bonesListList.Last().First();
+                MyBone currentBone = bonesListList.Last().First();
                 string tabs = calcTabs(currentBone);
                 if (currentBone.Root == true)
                     file.WriteLine("ROOT " + currentBone.Name);
@@ -186,7 +183,7 @@ namespace iRobotKinect
                     while (bonesListList.Count != 0 && bonesListList.Last().Count == 1)
                     {
                         tabs = calcTabs(bonesListList.Last()[0]);
-                        foreach (List<NGEBone> liste in bonesListList)
+                        foreach (List<MyBone> liste in bonesListList)
                         {
                             if (liste.Contains(bonesListList.Last()[0]))
                             {
@@ -215,35 +212,35 @@ namespace iRobotKinect
                 {
                     file.WriteLine(tabs + "\t" + writeChannels(currentBone));
                 }
-                NGESkeleton.Bones.Remove(currentBone);
-                NGESkeletonWritten.AddBone(currentBone);
+                mySkeleton.Bones.Remove(currentBone);
+                mySkeletonWritten.AddBone(currentBone);
             }
-            NGESkeletonWritten.copyParameters(NGESkeleton);
+            mySkeletonWritten.copyParameters(mySkeleton);
         }
 
         public void Motion(Skeleton skel)
         {
-            sw.Start(); //Recording der Bewegungen beginnt
+            sw.Start(); //Recording when the motion begins
                 
-            for (int k = 0; k < NGESkeletonWritten.Bones.Count; k++)
+            for (int k = 0; k < mySkeletonWritten.Bones.Count; k++)
             {
-                if (NGESkeletonWritten.Bones[k].End == false)
+                if (mySkeletonWritten.Bones[k].End == false)
                 {
                     double[] degVec = new double[3];
-                    degVec = KinectSkeletonNGE.getEulerFromBone(NGESkeletonWritten.Bones[k], skel);
+                    degVec = MyKinectSkeleton.getEulerFromBone(mySkeletonWritten.Bones[k], skel);
 
                     int indexOffset = 0;
-                    if (NGESkeletonWritten.Bones[k].Root == true)
+                    if (mySkeletonWritten.Bones[k].Root == true)
                     {
                         indexOffset = 3;
                     }
 
-                    tempMotionVektor[NGESkeletonWritten.Bones[k].MotionSpace + indexOffset] = degVec[0];
-                    tempMotionVektor[NGESkeletonWritten.Bones[k].MotionSpace + 1 + indexOffset] = degVec[1];
-                    tempMotionVektor[NGESkeletonWritten.Bones[k].MotionSpace + 2 + indexOffset] = degVec[2];
+                    tempMotionVector[mySkeletonWritten.Bones[k].MotionSpace + indexOffset] = degVec[0];
+                    tempMotionVector[mySkeletonWritten.Bones[k].MotionSpace + 1 + indexOffset] = degVec[1];
+                    tempMotionVector[mySkeletonWritten.Bones[k].MotionSpace + 2 + indexOffset] = degVec[2];
 
-                    // Textbox setzen
-                    string boneName = NGESkeletonWritten.Bones[k].Name;
+                    // Textbox set
+                    string boneName = mySkeletonWritten.Bones[k].Name;
                     if (boneName == textFeld.getDropDownJoint)
                     {
                         //Rotation
@@ -251,15 +248,15 @@ namespace iRobotKinect
                         textFeld.setTextBoxAngles = textBox;
 
                         //Position
-                        JointType KinectJoint = KinectSkeletonNGE.getJointTypeFromNGEBone(NGESkeletonWritten.Bones[k]);
+                        JointType KinectJoint = MyKinectSkeleton.getJointTypeFromMyBone(mySkeletonWritten.Bones[k]);
                         double x = skel.Joints[KinectJoint].Position.X;
                         double y = skel.Joints[KinectJoint].Position.Y;
                         double z = skel.Joints[KinectJoint].Position.Z;
                         textFeld.setTextPosition = Math.Round(x, 2).ToString() +  " " +  Math.Round(y, 2).ToString() + " " + Math.Round(z, 2).ToString();
 
                         //Length
-                        NGEBone tempBone = NGESkeletonWritten.Bones.Find(i => i.Name == KinectJoint.ToString());
-                        double[] boneVec = KinectSkeletonNGE.getBoneVectorOutofJointPosition(tempBone, skel);
+                        MyBone tempBone = mySkeletonWritten.Bones.Find(i => i.Name == KinectJoint.ToString());
+                        double[] boneVec = MyKinectSkeleton.getBoneVectorOutofJointPosition(tempBone, skel);
                         double length = Math.Sqrt(Math.Pow(boneVec[0], 2) + Math.Pow(boneVec[1], 2) + Math.Pow(boneVec[2], 2));
                         length = Math.Round(length, 2);
                         textFeld.setTextBoxLength = length.ToString();
@@ -267,12 +264,12 @@ namespace iRobotKinect
                 }
 
             }
-            //Root Bewegung
-            tempMotionVektor[0] = -Math.Round( skel.Position.X * 100,2);
-            tempMotionVektor[1] = Math.Round( skel.Position.Y * 100,2) + 120;
-            tempMotionVektor[2] = 300 - Math.Round( skel.Position.Z * 100,2);
+            //Root Movement
+            tempMotionVector[0] = -Math.Round( skel.Position.X * 100,2);
+            tempMotionVector[1] = Math.Round( skel.Position.Y * 100,2) + 120;
+            tempMotionVector[2] = 300 - Math.Round( skel.Position.Z * 100,2);
 
-            writeMotion(tempMotionVektor);
+            writeMotion(tempMotionVector);
             file.Flush();
 
             elapsedTimeSec =  Math.Round(Convert.ToDouble(sw.ElapsedMilliseconds) / 1000,2);
@@ -283,7 +280,7 @@ namespace iRobotKinect
             
         }
 
-        private void writeMotion(double[] tempMotionVektor)
+        private void writeMotion(double[] tempMotionVector)
         {
             string motionStringValues = "";
 
@@ -293,7 +290,7 @@ namespace iRobotKinect
                 file.WriteLine("Frames: PLACEHOLDERFRAMES");
                 file.WriteLine("Frame Time: 0.0333333");
             }
-            foreach (var i in tempMotionVektor)
+            foreach (var i in tempMotionVector)
             {
                 motionStringValues += (Math.Round(i, 4).ToString().Replace(",", ".") + " ");
             }
@@ -303,7 +300,7 @@ namespace iRobotKinect
             frameCounter++;
         }
 
-        private string writeChannels(NGEBone bone)
+        private string writeChannels(MyBone bone)
         {
             string output = "CHANNELS " + bone.Channels.Length.ToString() + " ";
 
@@ -315,7 +312,7 @@ namespace iRobotKinect
             return output;
         }
 
-        private string calcTabs(NGEBone currentBone)
+        private string calcTabs(MyBone currentBone)
         {
             int depth = currentBone.Depth;
             string tabs = "";

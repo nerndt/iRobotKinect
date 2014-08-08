@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace iRobotKinect
 {
-    public enum NGEChannel
+    public enum PositionRotation
     {
         Xposition,
         Yposition,
@@ -27,14 +27,14 @@ namespace iRobotKinect
         nZ
     }
 
-    public class NGESkeleton
+    public class MySkeleton
     {
-        List<NGEBone> bones;
+        List<MyBone> bones;
         int maxDepth = 0;
         int nrBones;
         int channels;
 
-        public List<NGEBone> Bones
+        public List<MyBone> Bones
         {
             get { return bones; }
         }
@@ -44,12 +44,12 @@ namespace iRobotKinect
             get { return channels; }
         }
 
-        public NGESkeleton()
+        public MySkeleton()
         {
-            bones = new List<NGEBone>();
+            bones = new List<MyBone>();
         }
 
-        public void AddBone(NGEBone Bone)
+        public void AddBone(MyBone Bone)
         {
             if (!Bones.Contains(Bone))
             {
@@ -57,7 +57,7 @@ namespace iRobotKinect
             }
         }
 
-        public void FinalizeNGESkeleton()
+        public void FinalizeMySkeleton()
         {
             for (int k = 0; k < Bones.Count(); k++)
             {
@@ -77,7 +77,7 @@ namespace iRobotKinect
                 channels += Bones[k].ChannelCount;
 
                 //set Children
-                List<NGEBone> childBoneList = Bones.FindAll(i => i.Parent == Bones[k]);
+                List<MyBone> childBoneList = Bones.FindAll(i => i.Parent == Bones[k]);
                 if (childBoneList.Count == 0)
                 {
                     Bones[k].End = true;
@@ -90,7 +90,7 @@ namespace iRobotKinect
             }
         }
 
-        public void copyParameters(NGESkeleton input)
+        public void copyParameters(MySkeleton input)
         {
             channels = input.Channels;
             maxDepth = input.maxDepth;
@@ -103,14 +103,14 @@ namespace iRobotKinect
         }
     }
 
-    public class NGEBone
+    public class MyBone
     {
-        NGEBone parent;
-        List<NGEBone> children;
+        MyBone parent;
+        List<MyBone> children;
         string name;
         int depth;
         static int index = 1;
-        NGEChannel[] channels;
+        PositionRotation[] channels;
         public double[] rotOffset = new double[] { 0, 0, 0 };
         public double[] translOffset = new double[]{0, 0, 0};
         bool end;
@@ -120,7 +120,7 @@ namespace iRobotKinect
         bool isKinectJoint;
 
 
-        public List<NGEBone> Children
+        public List<MyBone> Children
         {
             get { return children; }
             set { children = value; }
@@ -168,16 +168,16 @@ namespace iRobotKinect
         {
             get { return name; }
         }
-        public NGEBone Parent
+        public MyBone Parent
         {
             get { return parent; }
         }
-        public NGEChannel[] Channels
+        public PositionRotation[] Channels
         {
             get { return channels; }
         }
   
-        public NGEBone(NGEBone Parent, string Name, int nrChannels, TransAxis Axis, bool IsKinectJoint)
+        public MyBone(MyBone Parent, string Name, int nrChannels, TransAxis Axis, bool IsKinectJoint)
         {
             parent = Parent;
             index += index;
@@ -191,11 +191,11 @@ namespace iRobotKinect
                 depth = 0;
                 root = true;
             }
-            channels = new NGEChannel[nrChannels];
+            channels = new PositionRotation[nrChannels];
             int ind = 5;
             for (int k = nrChannels-1; k >= 0; k--)
             {
-                channels[k] = (NGEChannel)ind;
+                channels[k] = (PositionRotation)ind;
                 ind--;
             }
         }
