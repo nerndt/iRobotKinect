@@ -96,6 +96,8 @@ namespace iRobotKinect
 
         Bitmap depthBmp = null;
 
+        private SpeechRecognizer mySpeechRecognizer;
+
         #endregion Private Fields
 
         public KinectForm()
@@ -221,6 +223,16 @@ namespace iRobotKinect
                     {
                         this.sensor.Start();
                         this.textBox_sensorStatus.Text = "Stream started";
+
+                        // Start speech recognizer after KinectSensor started successfully.
+                        this.mySpeechRecognizer = SpeechRecognizer.Create();
+
+                        if (null != this.mySpeechRecognizer)
+                        {
+                            this.mySpeechRecognizer.SaidSomething += this.RecognizerSaidSomething;
+                            this.mySpeechRecognizer.Start(sensor.AudioSource);
+                        }
+
                     }
                     catch (Exception)
                     {
@@ -2106,6 +2118,163 @@ namespace iRobotKinect
         #endregion commented out
         
         #endregion Kinect Fusion Members
+
+        #region Kinect Speech processing
+        private void RecognizerSaidSomething(object sender, SpeechRecognizer.SaidSomethingEventArgs e)
+        {
+            Program.UI.StartForm.labelSpeechCommand.Text = e.Matched;
+            //FlyingText.NewFlyingText(this.screenRect.Width / 30, new Point(this.screenRect.Width / 2, this.screenRect.Height / 2), e.Matched);
+            switch (e.Verb)
+            {
+                case SpeechRecognizer.Verbs.Faster:
+                    if (frmDrive.RobotSpeed >= 0)
+                    {
+                        Program.UI.DriveForm.HandleKeys(Keys.Up);
+                    }
+                    else
+                    {
+                        Program.UI.DriveForm.HandleKeys(Keys.Down);
+                    }
+                    break;
+                case SpeechRecognizer.Verbs.Slower:
+                    if (frmDrive.RobotSpeed >= 0)
+                    {
+                        Program.UI.DriveForm.HandleKeys(Keys.Down);
+                    }
+                    else
+                    {
+                        Program.UI.DriveForm.HandleKeys(Keys.Up);
+                    }
+                    break;
+                case SpeechRecognizer.Verbs.Left:
+                    Program.UI.DriveForm.HandleKeys(Keys.Left);
+                    break;
+                case SpeechRecognizer.Verbs.Right:
+                    Program.UI.DriveForm.HandleKeys(Keys.Right);
+                    break;
+                case SpeechRecognizer.Verbs.Forwards:
+                case SpeechRecognizer.Verbs.Start:
+                case SpeechRecognizer.Verbs.Go:
+                case SpeechRecognizer.Verbs.Resume:
+                    Program.UI.DriveForm.HandleKeys(Keys.Up);
+                    break;
+                case SpeechRecognizer.Verbs.Back:
+                case SpeechRecognizer.Verbs.Backwards:
+                case SpeechRecognizer.Verbs.Reverse:
+                     Program.UI.DriveForm.HandleKeys(Keys.Down);
+                   break;
+                case SpeechRecognizer.Verbs.Stop:
+                case SpeechRecognizer.Verbs.Halt:
+                case SpeechRecognizer.Verbs.End:
+                case SpeechRecognizer.Verbs.Reset:
+                case SpeechRecognizer.Verbs.Pause:
+                   Program.UI.DriveForm.HandleKeys(Keys.Space);
+                    break;
+
+                //case SpeechRecognizer.Verbs.Pause:
+                //    this.myFallingThings.SetDropRate(0);
+                //    this.myFallingThings.SetGravity(0);
+                //    break;
+                //case SpeechRecognizer.Verbs.Resume:
+                //    this.myFallingThings.SetDropRate(this.dropRate);
+                //    this.myFallingThings.SetGravity(this.dropGravity);
+                //    break;
+                //case SpeechRecognizer.Verbs.Reset:
+                //    this.dropRate = DefaultDropRate;
+                //    this.dropSize = DefaultDropSize;
+                //    this.dropGravity = DefaultDropGravity;
+                //    this.myFallingThings.SetPolies(PolyType.All);
+                //    this.myFallingThings.SetDropRate(this.dropRate);
+                //    this.myFallingThings.SetGravity(this.dropGravity);
+                //    this.myFallingThings.SetSize(this.dropSize);
+                //    this.myFallingThings.SetShapesColor(System.Windows.Media.Color.FromRgb(0, 0, 0), true);
+                //    this.myFallingThings.Reset();
+                //    break;
+                //case SpeechRecognizer.Verbs.DoShapes:
+                //    this.myFallingThings.SetPolies(e.Shape);
+                //    break;
+                //case SpeechRecognizer.Verbs.RandomColors:
+                //    this.myFallingThings.SetShapesColor(System.Windows.Media.Color.FromRgb(0, 0, 0), true);
+                //    break;
+                //case SpeechRecognizer.Verbs.Colorize:
+                //    this.myFallingThings.SetShapesColor(e.RgbColor, false);
+                //    break;
+                //case SpeechRecognizer.Verbs.ShapesAndColors:
+                //    this.myFallingThings.SetPolies(e.Shape);
+                //    this.myFallingThings.SetShapesColor(e.RgbColor, false);
+                //    break;
+                //case SpeechRecognizer.Verbs.More:
+                //    this.dropRate *= 1.5;
+                //    this.myFallingThings.SetDropRate(this.dropRate);
+                //    break;
+                //case SpeechRecognizer.Verbs.Fewer:
+                //    this.dropRate /= 1.5;
+                //    this.myFallingThings.SetDropRate(this.dropRate);
+                //    break;
+                //case SpeechRecognizer.Verbs.Bigger:
+                //    this.dropSize *= 1.5;
+                //    if (this.dropSize > MaxShapeSize)
+                //    {
+                //        this.dropSize = MaxShapeSize;
+                //    }
+
+                //    this.myFallingThings.SetSize(this.dropSize);
+                //    break;
+                //case SpeechRecognizer.Verbs.Biggest:
+                //    this.dropSize = MaxShapeSize;
+                //    this.myFallingThings.SetSize(this.dropSize);
+                //    break;
+                //case SpeechRecognizer.Verbs.Smaller:
+                //    this.dropSize /= 1.5;
+                //    if (this.dropSize < MinShapeSize)
+                //    {
+                //        this.dropSize = MinShapeSize;
+                //    }
+
+                //    this.myFallingThings.SetSize(this.dropSize);
+                //    break;
+                //case SpeechRecognizer.Verbs.Smallest:
+                //    this.dropSize = MinShapeSize;
+                //    this.myFallingThings.SetSize(this.dropSize);
+                //    break;
+                //case SpeechRecognizer.Verbs.Faster:
+                //    this.dropGravity *= 1.25;
+                //    if (this.dropGravity > 4.0)
+                //    {
+                //        this.dropGravity = 4.0;
+                //    }
+
+                //    this.myFallingThings.SetGravity(this.dropGravity);
+                //    break;
+                //case SpeechRecognizer.Verbs.Slower:
+                //    this.dropGravity /= 1.25;
+                //    if (this.dropGravity < 0.25)
+                //    {
+                //        this.dropGravity = 0.25;
+                //    }
+
+                //    this.myFallingThings.SetGravity(this.dropGravity);
+                //    break;
+            }
+        }
+
+        private void EnableAecChecked(object sender, RoutedEventArgs e)
+        {
+            var enableAecCheckBox = (CheckBox)sender;
+            this.UpdateEchoCancellation(enableAecCheckBox);
+        }
+
+        private void UpdateEchoCancellation(CheckBox aecCheckBox)
+        {
+            if (aecCheckBox != null)
+            {
+                this.mySpeechRecognizer.EchoCancellationMode = aecCheckBox.Checked
+                    ? EchoCancellationMode.CancellationAndSuppression
+                    : EchoCancellationMode.None;
+            }
+        }
+
+        #endregion Kinect Speech processing
 
     }
 

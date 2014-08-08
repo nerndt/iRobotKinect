@@ -14,18 +14,18 @@ namespace iRobotKinect
 {
     public partial class frmDrive : iRobotKinect.frmMenu
     {
-        static PointF RobotPosition = new Point(0, 0); // Keep trackof the robot's position based on time, velocity, and angle
-        static float RobotDirection = 0; // Keep trackof the robot's direction based on time, velocity, and angle
-        static double RobotSpeed = 0; // Keep trackof the robot's speed based on time, velocity, and angle
+        static public PointF RobotPosition = new Point(0, 0); // Keep trackof the robot's position based on time, velocity, and angle
+        static public float RobotDirection = 0; // Keep trackof the robot's direction based on time, velocity, and angle
+        static public double RobotSpeed = 0; // Keep trackof the robot's speed based on time, velocity, and angle
         // xPos = time * cos(angle) * velocity
         // yPos = time * sin(angle) * velocity
-        static long ElapsedTimeMilliseconds = 0;
-        static Stopwatch stopWatchStart = new Stopwatch();
-        static Stopwatch stopWatch = new Stopwatch();
-        static bool MotionStarted = false; // Keep track of if motion has began
-      
-        static bool Moving = false; // Keep track of motion
-        static bool Rotating = false; // Keep track of direction
+        static public long ElapsedTimeMilliseconds = 0;
+        static public Stopwatch stopWatchStart = new Stopwatch();
+        static public Stopwatch stopWatch = new Stopwatch();
+        static public bool MotionStarted = false; // Keep track of if motion has began
+
+        static public bool Moving = false; // Keep track of motion
+        static public bool Rotating = false; // Keep track of direction
 
         // This delegate enables asynchronous calls for setting
         // the text property on a TextBox control.

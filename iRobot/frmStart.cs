@@ -54,7 +54,10 @@ namespace iRobotKinect
         public frmStart()
         {
             InitializeComponent();
-            Program.UI = new RoombaUI();
+            if (!this.DesignMode)
+            {
+                Program.UI = new RoombaUI();
+            }
         }
 
         public double p_dFormUpdated;

@@ -128,6 +128,8 @@ namespace iRobotKinect
             this.label2 = new System.Windows.Forms.Label();
             this.loadMacro = new System.Windows.Forms.OpenFileDialog();
             this.buttonExit = new System.Windows.Forms.Button();
+            this.labelSpeech = new System.Windows.Forms.Label();
+            this.labelSpeechCommand = new System.Windows.Forms.Label();
             this.cmConnectionMenu.SuspendLayout();
             this.tabStart.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -578,12 +580,12 @@ namespace iRobotKinect
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(86, 4);
+            this.label3.Location = new System.Drawing.Point(114, 6);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(112, 13);
+            this.label3.Size = new System.Drawing.Size(80, 13);
             this.label3.TabIndex = 307;
-            this.label3.Text = "Form Connection (MS)";
+            this.label3.Text = "Roomba Status";
             // 
             // lblPoller
             // 
@@ -1015,6 +1017,26 @@ namespace iRobotKinect
             this.buttonExit.UseVisualStyleBackColor = false;
             this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
             // 
+            // labelSpeech
+            // 
+            this.labelSpeech.AutoSize = true;
+            this.labelSpeech.Location = new System.Drawing.Point(430, 6);
+            this.labelSpeech.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelSpeech.Name = "labelSpeech";
+            this.labelSpeech.Size = new System.Drawing.Size(97, 13);
+            this.labelSpeech.TabIndex = 327;
+            this.labelSpeech.Text = "Speech Command:";
+            // 
+            // labelSpeechCommand
+            // 
+            this.labelSpeechCommand.AutoSize = true;
+            this.labelSpeechCommand.Location = new System.Drawing.Point(531, 6);
+            this.labelSpeechCommand.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelSpeechCommand.Name = "labelSpeechCommand";
+            this.labelSpeechCommand.Size = new System.Drawing.Size(33, 13);
+            this.labelSpeechCommand.TabIndex = 328;
+            this.labelSpeechCommand.Text = "None";
+            // 
             // frmStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1022,6 +1044,8 @@ namespace iRobotKinect
             this.ClientSize = new System.Drawing.Size(1260, 717);
             this.ContextMenuStrip = this.cmConnectionMenu;
             this.ControlBox = false;
+            this.Controls.Add(this.labelSpeechCommand);
+            this.Controls.Add(this.labelSpeech);
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.lblFormUpdated);
             this.Controls.Add(this.label3);
@@ -1041,6 +1065,8 @@ namespace iRobotKinect
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.lblFormUpdated, 0);
             this.Controls.SetChildIndex(this.buttonExit, 0);
+            this.Controls.SetChildIndex(this.labelSpeech, 0);
+            this.Controls.SetChildIndex(this.labelSpeechCommand, 0);
             this.cmConnectionMenu.ResumeLayout(false);
             this.tabStart.ResumeLayout(false);
             this.tabStart.PerformLayout();
@@ -1157,5 +1183,7 @@ namespace iRobotKinect
         private System.Windows.Forms.Panel panelKinect;
         private KinectCtrl kinectCtrl1;
         private System.Windows.Forms.Button buttonExit;
+        private System.Windows.Forms.Label labelSpeech;
+        public System.Windows.Forms.Label labelSpeechCommand;
     }
 }

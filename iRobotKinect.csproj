@@ -28,7 +28,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>8</ApplicationRevision>
+    <ApplicationRevision>9</ApplicationRevision>
     <ApplicationVersion>0.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -45,7 +45,8 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
     <PlatformTarget>x86</PlatformTarget>
-    <DocumentationFile>..\bin\Debug\iRobotKinect.XML</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -56,7 +57,8 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
     <PlatformTarget>x86</PlatformTarget>
-    <DocumentationFile>..\bin\Release\iRobotKinect.XML</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>E5D1005032A61EDA57C80851E16BB20419D00DBF</ManifestCertificateThumbprint>
@@ -91,6 +93,10 @@
     <Reference Include="Microsoft.Kinect.Toolkit.Fusion, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Program Files\Microsoft SDKs\Kinect\Developer Toolkit v1.8.0\Samples\C#\Microsoft.Kinect.Toolkit.Fusion\bin\Debug\Microsoft.Kinect.Toolkit.Fusion.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Speech, Version=11.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Windows\assembly\GAC_MSIL\Microsoft.Speech\11.0.0.0__31bf3856ad364e35\Microsoft.Speech.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
@@ -187,6 +193,8 @@
     <Compile Include="Kinect\BitmapManipulator.cs" />
     <Compile Include="Kinect\Canny.cs" />
     <Compile Include="Kinect\ColorMap.cs" />
+    <Compile Include="Kinect\FallingShapes.cs" />
+    <Compile Include="Kinect\FallingThings.cs" />
     <Compile Include="Kinect\GraphicsCamera.cs" />
     <Compile Include="Kinect\KinectCtrl.cs">
       <SubType>UserControl</SubType>
@@ -207,6 +215,7 @@
     <Compile Include="Kinect\NGE.cs" />
     <Compile Include="Kinect\PointCloud.cs" />
     <Compile Include="Kinect\ScreenSpaceLines3D.cs" />
+    <Compile Include="Kinect\SpeechRecognizer.cs" />
     <Compile Include="Kinect\TextFields.cs">
       <SubType>UserControl</SubType>
     </Compile>
