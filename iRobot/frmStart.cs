@@ -332,13 +332,16 @@ namespace iRobotKinect
 
             Log.This(c_sLoadingConfig + sConfig_File, this.Name, true);
 
+            //MessageBox.Show("Before Config File");
+
             if (File.Exists(sConfig_File))
             {
-                iRobotKinect.Config_Settings csSavedData;
-                XmlSerializer s = new XmlSerializer(typeof(iRobotKinect.Config_Settings));
+                //MessageBox.Show("Found Config File");
+                //iRobotKinect.Config_Settings csSavedData = Config_Settings.Deserialize("Resources/config"); // "Resources/config.xml"
 
+                XmlSerializer s = new XmlSerializer(typeof(iRobotKinect.Config_Settings));
                 TextReader trRead = new StreamReader(sConfig_File);
-                csSavedData = (iRobotKinect.Config_Settings)s.Deserialize(trRead);
+                iRobotKinect.Config_Settings csSavedData = (iRobotKinect.Config_Settings)s.Deserialize(trRead); // "Resources/config.xml"
                 trRead.Close();
 
                 Program.UI.Config = csSavedData;
@@ -350,6 +353,7 @@ namespace iRobotKinect
                 string comFoundResult = Program.UI.Config.COMM.ConnectedTo;
                 if (comPorts.Count > 0)
                 {
+                    //MessageBox.Show("Found Com Port " + comPorts[0]);
                     comFoundResult = comPorts.Find(item => item == Program.UI.Config.COMM.ConnectedTo);
                     if (comFoundResult != null)
                     {
@@ -359,12 +363,14 @@ namespace iRobotKinect
                     {
                         Program.UI.Config.COMM.ConnectedTo = comPorts[0];
                         this.lblCOMM_Port_Used.Text = comPorts[0];
+                        // At some point need to save!!!!!!! s.Serialize(csSavedData, sConfig_File);
                     }
                 }
                 else
                 {
                     this.lblCOMM_Port_Used.Text = "NONE";
                 }
+                //MessageBox.Show("Com Port Used " + this.lblCOMM_Port_Used.Text);
 
                 #region Open all windows at startup
                 Show();

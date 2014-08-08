@@ -4,6 +4,9 @@ using System.Xml;
 using System.IO.Ports;
 using System.Xml.Serialization;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading;
 
 using RoombaSCI;
 
@@ -529,6 +532,62 @@ namespace iRobotKinect
             xsApply.Serialize(twWriteFile, Program.UI.Config);
             twWriteFile.Close();
         }
+
+        #region Serialization
+
+        public static void Serialize(Config_Settings settings, string filename)
+        {
+            Stream stream = File.Open(filename, FileMode.Create);
+            BinaryFormatter bformatter = new BinaryFormatter();
+            // Console.WriteLine("Writing CRSettings Information");
+            try
+            {
+                bformatter.Serialize(stream, settings);
+            }
+            catch (SerializationException) // ex)
+            {
+                // Console.WriteLine("Exception for Serialization data : " + ex.Message);
+                throw;
+            }
+            finally
+            {
+                stream.Close();
+                // Console.WriteLine("successfully wrote CRSettings information");
+            }
+        }
+
+        public static Config_Settings Deserialize(string filename)
+        {
+            Config_Settings settings = null;
+            Stream stream = File.Open(filename, FileMode.Open);
+            BinaryFormatter bformatter = new BinaryFormatter();
+            // Console.WriteLine("Reading Config_Settings Information");
+            try
+            {
+                settings = (Config_Settings)bformatter.Deserialize(stream);
+                Thread.Sleep(500);
+            }
+            catch (SerializationException) // ex)
+            {
+                // Console.WriteLine("Exception for Deserialize data : " + ex.Message);
+                throw;
+            }
+            finally
+            {
+                stream.Close();
+            }
+            if (settings != null)
+            {
+                // Console.WriteLine("Config_Settings Name: {0}", settings.Name);
+            }
+            else
+            {
+                // Console.WriteLine("Deserialize Config_Settings null value");
+            }
+            return settings;
+        }
+
+        #endregion Serialization
 
     }
 
