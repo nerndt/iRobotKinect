@@ -20,8 +20,8 @@ using System.Windows.Media.Imaging;
 
 //Manuell hinzugefügt
 using Microsoft.Kinect;
-using Microsoft.Kinect.Toolkit;
-using Microsoft.Kinect.Toolkit.Fusion;
+//using Microsoft.Kinect.Toolkit;
+//using Microsoft.Kinect.Toolkit.Fusion;
 
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
