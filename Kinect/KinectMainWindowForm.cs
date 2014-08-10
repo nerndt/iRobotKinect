@@ -598,7 +598,7 @@ namespace iRobotKinect
                         //ConvertDepthFrameData(sender, depthFrame);
 
                         DepthImagePixel[] depth = depthFrame.GetRawPixelData();
-                        pictureBox_colorPic.BackgroundImage = iRobotKinect.WinForms.DepthExtensions.ToBitmap(depthFrame, PixelFormat.Format32bppRgb, iRobotKinect.WinForms.DepthImageMode.Colors);
+                        pictureBox_colorPic.BackgroundImage = iRobotKinect.DepthExtensions.ToBitmap(depthFrame, PixelFormat.Format32bppRgb, iRobotKinect.DepthImageMode.Colors);
                     }
                 }
 
@@ -660,7 +660,7 @@ namespace iRobotKinect
                                 }
                             }
                             // Flip the bitmap
-                            tempSkeletonFrame = BitmapManipulator.MirrorXBitmap((Bitmap)tempSkeletonFrame);
+                            tempSkeletonFrame = BitmapManipulator.MirrorYBitmap((Bitmap)tempSkeletonFrame);
                             this.pictureBox_skeleton.BackgroundImage = tempSkeletonFrame; // this.pictureBox_skeleton.Image = tempSkeletonFrame;
                             //this.pictureBox_skeleton.Image = new Bitmap(tempSkeletonFrame, this.pictureBox_skeleton.Width, this.pictureBox_skeleton.Height);
                         }

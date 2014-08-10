@@ -1,11 +1,24 @@
 using System;
-using System.IO;
-using System.Drawing;
-using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
 using System.Threading;
-
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Runtime.InteropServices;
+using CMDLine;
+using System.Runtime.Remoting;
+using System.Runtime.Remoting.Channels;
+using System.Runtime.Remoting.Channels.Ipc;
+using System.Diagnostics;
+using System.IO;
 using System.Xml;
+using System.Deployment.Application;
+
 using System.Xml.Serialization;
 
 using RoombaSCI;
@@ -17,7 +30,7 @@ using Logging;
 
 namespace iRobotKinect
 {
-    public partial class frmStart : iRobotKinect.frmMenu
+    public partial class MainForm : iRobotKinect.frmMenu
     {
         #region Constants
         protected const char c_sDot = '.';
@@ -43,6 +56,34 @@ namespace iRobotKinect
 
         #region Member Variables
 
+        public static MainForm CRMainForm = null; // A global pointer to the main form of iRobotKinect
+        public static bool ShowApplication = true; // Allows running of this app from a command line!
+
+        public string[] ProgramArgs;
+        public CMDLineParser ProgramParser;
+
+        internal static float scaleRatioX = 1f; // Used for resizing Application basedon Screen Conditions (text size, screen resolution, etc.)
+        internal static float scaleRatioY = 1f; // Used for resizing Application basedon Screen Conditions (text size, screen resolution, etc.)
+
+        public static float OriginalFontSize = 12.0f;
+
+        public static float ScaleRatioX { set { scaleRatioX = value; } get { return scaleRatioX; } } // AmbientContext.IAmbientContext
+        public static float ScaleRatioY { set { scaleRatioY = value; } get { return scaleRatioY; } } // AmbientContext.IAmbientContext
+
+        #region Code below for handling multiple instances of iRobotKinect
+        public static System.Threading.Mutex MainFormMutex = null;
+        public static bool AllowForMultipleInstancesOfiRobotKinect = false; //true;
+        public static string MutexName = Program.DefaultMutexName;
+        public static string InitialInstanceMutexName = ""; // The initial instance of iRobotKinect        
+        #endregion Code below for handling multiple instances of iRobotKinect
+
+        #region Command Line Variables
+        public string DriveLeft = ""; // parser.AddStringParameter("-l", "Left", false);
+        public string DriveRight = ""; // parser.AddStringParameter("-r", "Right", false);
+        public string DriveForwards = ""; // parser.AddStringParameter("-f", "Forwards", false);
+        public string DriveBackwards = ""; // parser.AddStringParameter("-b", "Backwards", false);
+        #endregion Command Line Variables
+
         static int m_iFormUpdated_DisplayLag = 0;
         static bool m_bPluggedInFlasher = false;
         static bool m_bRecordingFlasher = false;
@@ -51,9 +92,14 @@ namespace iRobotKinect
 
         #endregion
 
-        public frmStart()
+        public MainForm()
         {
             InitializeComponent();
+            Init();
+        }
+
+        public void Init()
+        {
             if (!this.DesignMode)
             {
                 Program.UI = new RoombaUI();
@@ -543,7 +589,7 @@ namespace iRobotKinect
 
             if (bUpdate_Indicator)
             {
-                this.lblIsCurrent.Text = frmStart.c_sStopped;
+                this.lblIsCurrent.Text = MainForm.c_sStopped;
                 this.lblIsCurrent.BackColor = Color.Transparent;
 
                 this.lblFormUpdated.BackColor = Color.Transparent;
@@ -560,7 +606,7 @@ namespace iRobotKinect
         {
             if (Program.UI.CurrentRoomba.Automatic_Polling) { Program.UI.CurrentRoomba.Automatic_Polling = false; };
 
-            this.lblIsCurrent.Text = frmStart.c_sSuspended;
+            this.lblIsCurrent.Text = MainForm.c_sSuspended;
             this.lblIsCurrent.BackColor = Color.Yellow;
 
             this.lblFormUpdated.BackColor = Color.Yellow;
@@ -609,7 +655,7 @@ namespace iRobotKinect
                     m_iFormUpdated_DisplayLag++;
                     if (m_iFormUpdated_DisplayLag > Program.UI.Config.Forms.StartForm.FormUpdated_DisplayLag)
                     {
-                        this.lblFormUpdated.Text = frmStart.c_sNoRead;
+                        this.lblFormUpdated.Text = MainForm.c_sNoRead;
                         this.lblFormUpdated.BackColor = Color.Red;
                         this.lblChargeState.BackColor = Color.Transparent;
                         this.lblChargeState.Text = null;
@@ -675,7 +721,7 @@ namespace iRobotKinect
                 }
                 else
                 {
-                    lblIsCurrent.Text = frmStart.c_sNoRead;
+                    lblIsCurrent.Text = MainForm.c_sNoRead;
                     lblIsCurrent.BackColor = Color.Red;
                 }
             }
@@ -1005,6 +1051,45 @@ namespace iRobotKinect
 
         #endregion Drive Commands
 
+        // Replacement for MessageBox.Show(this, ..) in order to show message box's in another thread
+        public DialogResult ShowMessageBox(string text, string caption = "", MessageBoxButtons buttons = MessageBoxButtons.OK, MessageBoxIcon icon = MessageBoxIcon.None, MessageBoxDefaultButton defaultButton = MessageBoxDefaultButton.Button1)
+        {
+            DialogResult dlgResult = DialogResult.None;
+
+            Invoke(new Action(delegate()
+            {
+                dlgResult = MessageBox.Show(this, text, caption, buttons, icon, defaultButton);
+            }));
+
+            return dlgResult;
+        }
+
+        public bool ValidateDirectory(string DirectoryPath)
+        {
+            // Check for DirectoryPath, create it if it does not exist
+            DirectoryInfo DirectoryInfo = Directory.CreateDirectory(DirectoryPath);
+
+            if (DirectoryInfo.Exists == false)
+            {
+                if (ShowApplication) ShowMessageBox(string.Format("Unable to create the \"{0}\" directory.", DirectoryPath), "Directory Error");
+                return false;
+            }
+
+            if ((DirectoryInfo.Attributes & FileAttributes.Directory) != FileAttributes.Directory)
+            {
+                if (ShowApplication) ShowMessageBox(string.Format("\"{0}\" is not a valid directory.  It may be a file!", DirectoryPath), "Directory error");
+                return false;
+            }
+
+            if ((DirectoryInfo.Attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
+            {
+                if (ShowApplication) ShowMessageBox(string.Format("The \"{0}\" directory is Read-Only.", DirectoryPath), "Directory error");
+                return false;
+            }
+
+            return true;
+        }
+
         public static void ShowFormInContainerControl(Control ctl, Form frm)
         {
             frm.TopLevel = false;
@@ -1019,5 +1104,155 @@ namespace iRobotKinect
             // Close the application
             this.Close();
         }
+
+        #region Code below for passing commands to other instances of Pixel
+        SingleInstance Instance;
+
+        public void CommandLineDrivenOpenPlate(string filename)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                Show();
+                WindowState = FormWindowState.Normal;
+            }
+
+            //// See if there is a current Plate loaded; if so, see if it is dirty; if so, prompt the user to save it before opening a new plate
+            //DialogResult dlgRes = SaveCurrentPlateInfoCheck();
+            //if (dlgRes == DialogResult.Cancel)
+            //{
+            //    // Enable appropriate control in interface
+            //    // Below line works if image is loaded into project and property changing the Build Action from Content (the default) to Embedded Resource 
+
+            //    return;
+            //}
+
+            Init();
+        }
+
+        public void SecondInstanceStarted(string[] args)
+        {
+
+            if (InvokeRequired)
+            {
+                BeginInvoke((MethodInvoker)delegate()
+                {
+                    SecondInstanceStarted(args);
+                });
+                return;
+            }
+
+            // This will force the MainForm to show up on top
+            TopMost = true;
+            TopMost = false;
+
+            // add code here to safely handle arguments given to 2nd instance
+            if (args != null && (args.Count() == 1 || (args.Count() == 2 && Path.GetFileName((string)args[0]) == "Pixel.exe")))
+            {
+                if (args.Count() == 1)
+                {
+                    CommandLineDrivenOpenPlate(args[0]);
+                }
+                else if (args.Count() == 2 && Path.GetFileName((string)args[0]) == "Pixel.exe") // Assume it is the qlp file to load               
+                {
+                    CommandLineDrivenOpenPlate(args[1]);
+                }
+                // NGE07252013 ShowMessageBox("B ProgramArgs = null");
+                ProgramArgs = null;
+                ProgramParser = null;
+            }
+        }
+        #endregion Code above for passing commands to other instances of Pixel
+
+        private void CheckForApplicationInstances(string[] args = null)
+        {
+            bool TooManyInstancesRunning = false;
+            string currentMutexName = "", newMutexName = "";
+            if (Program.RuniRobotKinectDueToMutexCondition(false, out TooManyInstancesRunning, ref currentMutexName, ref newMutexName) == false)
+            {
+                Process.GetCurrentProcess().Kill(); // End program
+                return;
+            }
+
+            if ((newMutexName != "" && newMutexName != currentMutexName) && (MainForm.MainFormMutex != Program.ApplicationMutex) && (currentMutexName != InitialInstanceMutexName))
+            {
+                // Wait for Splash Screen to exist (for a maximum of 5 seconds)
+                DateTime maxTime = DateTime.Now.AddSeconds(5);
+
+                #region SplashScreen
+                while (!SplashScreen.DoesSplashExist && DateTime.Now < maxTime)
+                    GuiHelper.Wait(0);
+
+                // Wait for 2 seconds (if the SplashScreen exists)
+                if (SplashScreen.DoesSplashExist)
+                    GuiHelper.Wait(2000);
+
+                // Close the Splash Screen
+                SplashScreen.CloseSplash();
+                Program.SplashCurrentlyShown = false;
+                #endregion SplashScreen
+
+                // This will force the MainForm to show up on top
+                TopMost = true;
+                TopMost = false;
+
+                // Create a host form that is a TopMost window which will be the 
+                // parent of the MessageBox.
+                Form topmostForm = new Form();
+                // We do not want anyone to see this window so position it off the 
+                // visible screen and make it as small as possible
+                topmostForm.Size = new System.Drawing.Size(1, 1);
+                topmostForm.StartPosition = FormStartPosition.Manual;
+                System.Drawing.Rectangle rect = SystemInformation.VirtualScreen;
+                topmostForm.Location = new System.Drawing.Point(rect.Bottom + 10,
+                    rect.Right + 10);
+                topmostForm.Show();
+                // Make this form the active form and make it TopMost
+                topmostForm.Focus();
+                topmostForm.BringToFront();
+                topmostForm.TopMost = true;
+                // Finally show the MessageBox with the form just created as its owner
+
+                // Prompt the user to see if they want to bring up a new instance of Pixel or the current one
+                DialogResult dlgRes = MessageBox.Show(topmostForm, "Do you want to bring up a new instance of Pixel?", "Open Pixel", MessageBoxButtons.YesNo, MessageBoxIcon.Question); // NGE07112012 Make sure MessageBox is on Top
+
+                topmostForm.Dispose(); // clean it up all the way
+
+                if (dlgRes == DialogResult.No)
+                {
+                    // NGE07252013 MessageBox.Show("D SingleInstance");
+                    Instance = new SingleInstance(this, args, currentMutexName);
+
+                    Process.GetCurrentProcess().Kill(); // End program
+                    return;
+                }
+                else
+                {
+                    MainForm.MutexName = newMutexName;
+                    // NGE07252013 MessageBox.Show("E SingleInstance");
+                    Instance = new SingleInstance(this, args, newMutexName);
+                }
+            }
+            else
+            {
+                // NGE07252013 MessageBox.Show("F SingleInstance");
+                Instance = new SingleInstance(this, args, currentMutexName);
+            }
+        }
+
+        public void MainForm_MouseDown(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        public void MainForm_MouseMove(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        public void MainForm_MouseUp(object sender, MouseEventArgs e)
+        {
+
+        }
+
     }
 }

@@ -915,7 +915,7 @@ namespace iRobotKinect
             this.numericRotationBaseSpeed.Size = new System.Drawing.Size(52, 20);
             this.numericRotationBaseSpeed.TabIndex = 325;
             this.numericRotationBaseSpeed.Value = new decimal(new int[] {
-            20,
+            40,
             0,
             0,
             0});
@@ -969,7 +969,7 @@ namespace iRobotKinect
             this.numericBaseSpeed.Size = new System.Drawing.Size(52, 20);
             this.numericBaseSpeed.TabIndex = 322;
             this.numericBaseSpeed.Value = new decimal(new int[] {
-            20,
+            60,
             0,
             0,
             0});

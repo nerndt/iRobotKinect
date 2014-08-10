@@ -16,7 +16,7 @@ namespace iRobotKinect
     {
         private short[] CreateAverageDepthArray(short[] depthArray)
         {
-            // This is a method of Weighted Moving Average per pixel coordinate across several frames of depth data.
+            // This is a method of Weighted Moving Average per iRobotKinect coordinate across several frames of depth data.
             // This means that newer frames are linearly weighted heavier than older frames to reduce motion tails,
             // while still having the effect of reducing noise flickering.
 
@@ -33,14 +33,14 @@ namespace iRobotKinect
             // REMEMBER!!! Queue's are FIFO (first in, first out).  This means that when you iterate
             // over them, you will encounter the oldest frame first.
 
-            // We first create a single array, summing all of the pixels of each frame on a weighted basis
+            // We first create a single array, summing all of the iRobotKinects of each frame on a weighted basis
             // and determining the denominator that we will be using later.
             foreach (var item in averageQueue)
             {
                 // Process each row in parallel
                 Parallel.For(0,240, depthArrayRowIndex =>
                 {
-                    // Process each pixel in the row
+                    // Process each iRobotKinect in the row
                     for (int depthArrayColumnIndex = 0; depthArrayColumnIndex < 320; depthArrayColumnIndex++)
                     {
                         var index = depthArrayColumnIndex + (depthArrayRowIndex * 320);
@@ -51,13 +51,13 @@ namespace iRobotKinect
                 Count++;
             }
 
-            // Once we have summed all of the information on a weighted basis, we can divide each pixel
+            // Once we have summed all of the information on a weighted basis, we can divide each iRobotKinect
             // by our calculated denominator to get a weighted average.
 
             // Process each row in parallel
             Parallel.For(0,240, depthArrayRowIndex =>
             {
-                // Process each pixel in the row
+                // Process each iRobotKinect in the row
                 for (int depthArrayColumnIndex = 0; depthArrayColumnIndex < 320; depthArrayColumnIndex++)
                 {
                     var index = depthArrayColumnIndex + (depthArrayRowIndex *320);

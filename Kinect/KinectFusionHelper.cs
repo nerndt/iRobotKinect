@@ -989,8 +989,8 @@
 //        /// <summary>
 //        /// Back-project 3D point assuming Z is the depth (parallel to the optical axis).
 //        /// </summary>
-//        /// <param name="x">Input x in pixels of 2D image.</param>
-//        /// <param name="y">Input y in pixels of 2D image.</param>
+//        /// <param name="x">Input x in iRobotKinects of 2D image.</param>
+//        /// <param name="y">Input y in iRobotKinects of 2D image.</param>
 //        /// <param name="z">Input depth to calculate 3D point for.</param>
 //        /// <param name="principalPointX">Principal point in x axis (non-normalized).</param>
 //        /// <param name="principalPointY">Principal point in y axis (non-normalized).</param>

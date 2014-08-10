@@ -1,6 +1,6 @@
 namespace iRobotKinect
 {
-    partial class frmStart
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@ namespace iRobotKinect
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStart));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.lblVersion = new System.Windows.Forms.Label();
             this.btnShutDown = new System.Windows.Forms.Button();
             this.btnMinimize = new System.Windows.Forms.Button();
@@ -1059,17 +1059,17 @@ namespace iRobotKinect
             this.labelGestureCommand.TabIndex = 328;
             this.labelGestureCommand.Text = "None";
             // 
-            // frmStart
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.CancelButton = this.btnShutDown;
             this.ClientSize = new System.Drawing.Size(1260, 717);
             this.ContextMenuStrip = this.cmConnectionMenu;
             this.ControlBox = false;
-            this.Controls.Add(this.labelSpeechCommand);
-            this.Controls.Add(this.labelSpeech);
             this.Controls.Add(this.labelGestureCommand);
             this.Controls.Add(this.labelGesture);
+            this.Controls.Add(this.labelSpeechCommand);
+            this.Controls.Add(this.labelSpeech);
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.lblFormUpdated);
             this.Controls.Add(this.label3);
@@ -1077,13 +1077,16 @@ namespace iRobotKinect
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "frmStart";
+            this.Name = "MainForm";
             this.ShowInTaskbar = true;
             this.Text = "Roomba-Create Kinect Startup";
             this.toolTip1.SetToolTip(this, "Right-Click to Start Roomba");
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmStart_FormClosing);
             this.Load += new System.EventHandler(this.frmStart_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseUp);
             this.Controls.SetChildIndex(this.tabControl1, 0);
             this.Controls.SetChildIndex(this.lblFormTimer, 0);
             this.Controls.SetChildIndex(this.label3, 0);

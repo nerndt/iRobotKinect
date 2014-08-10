@@ -115,7 +115,7 @@ namespace iRobotKinect
 
         // Update the segment's position and compute a smoothed velocity for the circle or the
         // endpoints of the segment based on  the time it took it to move from the last position
-        // to the current one.  The velocity is in pixels per second.
+        // to the current one.  The velocity is in iRobotKinects per second.
         public void UpdateSegment(Segment s)
         {
             this.LastSegment = this.Segment;

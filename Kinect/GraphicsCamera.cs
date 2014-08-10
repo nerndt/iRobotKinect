@@ -52,12 +52,12 @@
 //        //public const float DefaultCameraFrustumSize = 1.0f;
 
 //        ///// <summary>
-//        ///// Camera Frustum 3D graphics line thickness in pixels
+//        ///// Camera Frustum 3D graphics line thickness in iRobotKinects
 //        ///// </summary>
 //        //public const int DefaultCameraFrustumLineThickness = 2;
 
 //        ///// <summary>
-//        ///// Translate mouse speed (to convert pixels to m)
+//        ///// Translate mouse speed (to convert iRobotKinects to m)
 //        ///// </summary>
 //        //private const float TranslateMouse = 0.0002f;
 
@@ -67,7 +67,7 @@
 //        //private const float TranslateWheel = 0.001f;
 
 //        ///// <summary>
-//        ///// Rotate mouse speed (to convert pixels to radians)
+//        ///// Rotate mouse speed (to convert iRobotKinects to radians)
 //        ///// </summary>
 //        //private const float RotateMouse = 0.005f;
 

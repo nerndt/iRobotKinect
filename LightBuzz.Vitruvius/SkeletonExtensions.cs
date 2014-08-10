@@ -190,17 +190,17 @@ namespace iRobotKinect
         /// <summary>
         /// Returns the scaled value of the specified position.
         /// </summary>
-        /// <param name="maxPixel">Width or height.</param>
+        /// <param name="maxiRobotKinect">Width or height.</param>
         /// <param name="maxSkeleton">Border (X or Y).</param>
         /// <param name="position">Original position (X or Y).</param>
         /// <returns>The scaled value of the specified position.</returns>
-        private static float Scale(double maxPixel, double maxSkeleton, float position)
+        private static float Scale(double maxiRobotKinect, double maxSkeleton, float position)
         {
-            float value = (float)((((maxPixel / maxSkeleton) / 2) * position) + (maxPixel / 2));
+            float value = (float)((((maxiRobotKinect / maxSkeleton) / 2) * position) + (maxiRobotKinect / 2));
             
-            if (value > maxPixel)
+            if (value > maxiRobotKinect)
             {
-                return (float)maxPixel;
+                return (float)maxiRobotKinect;
             }
 
             if (value < 0)

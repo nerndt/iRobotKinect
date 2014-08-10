@@ -197,7 +197,7 @@ namespace iRobotKinect
         public void CreateGraph(Color _GraphColor)
         {
             GraphColor = _GraphColor;
-            SetPixels(ref objGraphics);
+            SetiRobotKinects(ref objGraphics);
         }
         public Bitmap GetGraph()
         {
@@ -222,7 +222,7 @@ namespace iRobotKinect
         private void SetYAxis(ref Graphics objGraphics, float iSlices)
         {
         }
-        private void SetPixels(ref Graphics objGraphics)
+        private void SetiRobotKinects(ref Graphics objGraphics)
         {
             float X1 = float.Parse(XAxis[0].ToString());
             float Y1 = float.Parse(YAxis[0].ToString());

@@ -19,7 +19,7 @@ namespace iRobotKinect
         {
             // When creating a depth array, it will have half the number of indexes than the original depth image
             // This is because the depth image uses two bytes to represent depth.  These values must then be 
-            // transformed to a single value per pixel of the final image that represents depth
+            // transformed to a single value per iRobotKinect of the final image that represents depth
             // for purposes of smoothing prior to rendering.
 
             short[] returnArray = new short[image.Width * image.Height];

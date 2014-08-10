@@ -25,7 +25,7 @@ namespace iRobotKinect
 
             //var depthFrame = BitmapManipulator.imageToByteArray(image); // Bits;
             //// We multiply the product of width and height by 4 because each byte
-            //// will represent a different color channel per pixel in the final iamge.
+            //// will represent a different color channel per iRobotKinect in the final iamge.
             //var colorFrame = new byte[height * width * 4];
 
             //// Process each row in parallel
@@ -37,7 +37,7 @@ namespace iRobotKinect
             //        var depthIndex = depthColumnIndex + (depthRowIndex * 640);
 
             //        // Because the colorFrame we are creating has twice as many bytes representing
-            //        // a pixel in the final image, we set the index to be twice of the depth index.
+            //        // a iRobotKinect in the final image, we set the index to be twice of the depth index.
             //        var index = depthIndex * 2;
 
             //        // Calculate the distance represented by the two depth bytes
@@ -53,7 +53,7 @@ namespace iRobotKinect
             //    }
             //});
 
-            //Bitmap bitmapFrame = ArrayToBitmap(colorFrame, width, height, PixelFormat.Format32bppRgb);
+            //Bitmap bitmapFrame = ArrayToBitmap(colorFrame, width, height, iRobotKinectFormat.Format32bppRgb);
             //return bitmapFrame;
         }
     }

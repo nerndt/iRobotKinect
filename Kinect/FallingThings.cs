@@ -671,7 +671,7 @@
 //                    double sqrLineSize = SquaredDistance(seg.X1, seg.Y1, seg.X2, seg.Y2);
 //                    if (sqrLineSize < 0.5)
 //                    {
-//                        // if less than 1/2 pixel apart, just check dx to an endpoint
+//                        // if less than 1/2 iRobotKinect apart, just check dx to an endpoint
 //                        return SquaredDistance(this.Center.X, this.Center.Y, seg.X1, seg.Y1) < minDxSquared;
 //                    }
 

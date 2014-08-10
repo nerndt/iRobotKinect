@@ -31,13 +31,13 @@ namespace iRobotKinect
             // We process each row in parallel
             Parallel.For(0, 240, depthArrayRowIndex =>
             {
-                // Process each pixel in the row
+                // Process each iRobotKinect in the row
                 for (int depthArrayColumnIndex = 0; depthArrayColumnIndex < 320; depthArrayColumnIndex++)
                 {
                     var depthIndex = depthArrayColumnIndex + (depthArrayRowIndex * 320);
 
                     // We are only concerned with eliminating 'white' noise from the data.
-                    // We consider any pixel with a depth of 0 as a possible candidate for filtering.
+                    // We consider any iRobotKinect with a depth of 0 as a possible candidate for filtering.
                     if (depthArray[depthIndex] == 0)
                     {
                         // From the depth index, we can determine the X and Y coordinates that the index
@@ -55,21 +55,21 @@ namespace iRobotKinect
                         int innerBandCount = 0;
                         int outerBandCount = 0;
 
-                        // The following loops will loop through a 5 X 5 matrix of pixels surrounding the 
-                        // candidate pixel.  This defines 2 distinct 'bands' around the candidate pixel.
-                        // If any of the pixels in this matrix are non-0, we will accumulate them and count
-                        // how many non-0 pixels are in each band.  If the number of non-0 pixels breaks the
-                        // threshold in either band, then the average of all non-0 pixels in the matrix is applied
-                        // to the candidate pixel.
+                        // The following loops will loop through a 5 X 5 matrix of iRobotKinects surrounding the 
+                        // candidate iRobotKinect.  This defines 2 distinct 'bands' around the candidate iRobotKinect.
+                        // If any of the iRobotKinects in this matrix are non-0, we will accumulate them and count
+                        // how many non-0 iRobotKinects are in each band.  If the number of non-0 iRobotKinects breaks the
+                        // threshold in either band, then the average of all non-0 iRobotKinects in the matrix is applied
+                        // to the candidate iRobotKinect.
                         for (int yi = -2; yi < 3; yi++)
                         {
                             for (int xi = -2; xi < 3; xi++)
                             {
                                 // yi and xi are modifiers that will be subtracted from and added to the
-                                // candidate pixel's x and y coordinates that we calculated earlier.  From the
+                                // candidate iRobotKinect's x and y coordinates that we calculated earlier.  From the
                                 // resulting coordinates, we can calculate the index to be addressed for processing.
 
-                                // We do not want to consider the candidate pixel (xi = 0, yi = 0) in our process at this point.
+                                // We do not want to consider the candidate iRobotKinect (xi = 0, yi = 0) in our process at this point.
                                 // We already know that it's 0
                                 if (xi != 0 || yi != 0)
                                 {
@@ -107,7 +107,7 @@ namespace iRobotKinect
                                                 }
                                             }
 
-                                            // We will then determine which band the non-0 pixel
+                                            // We will then determine which band the non-0 iRobotKinect
                                             // was found in, and increment the band counters.
                                             if (yi != 2 && yi != -2 && xi != 2 && xi != -2)
                                                 innerBandCount++;
@@ -120,14 +120,14 @@ namespace iRobotKinect
                         }
 
                         // Once we have determined our inner and outer band non-zero counts, and accumulated all of those values,
-                        // we can compare it against the threshold to determine if our candidate pixel will be changed to the
-                        // statistical mode of the non-zero surrounding pixels.
+                        // we can compare it against the threshold to determine if our candidate iRobotKinect will be changed to the
+                        // statistical mode of the non-zero surrounding iRobotKinects.
                         if (innerBandCount >= innerBandThreshold || outerBandCount >= outerBandThreshold)
                         {
                             short frequency = 0;
                             short depth = 0;
                             // This loop will determine the statistical mode
-                            // of the surrounding pixels for assignment to
+                            // of the surrounding iRobotKinects for assignment to
                             // the candidate.
                             for (int i = 0; i < 24; i++)
                             {
@@ -149,7 +149,7 @@ namespace iRobotKinect
                     }
                     else
                     {
-                        // If the pixel is not zero, we will keep the original depth.
+                        // If the iRobotKinect is not zero, we will keep the original depth.
                         smoothDepthArray[depthIndex] = depthArray[depthIndex];
                     }
                 }

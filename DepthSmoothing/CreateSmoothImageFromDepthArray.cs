@@ -21,7 +21,7 @@ namespace iRobotKinect
             int width = image.Width;
             int height = image.Height;
 
-            // We first want to create a simple array where each index represents a single pixel of depth information.
+            // We first want to create a simple array where each index represents a single iRobotKinect of depth information.
             // This will make it easier to work with the data to filter and average it for smoothing.
             short[] depthArray = CreateDepthArray(image);
 
@@ -42,19 +42,19 @@ namespace iRobotKinect
         private byte[] CreateColorBytesFromDepthArray(short[] depthArray, int width, int height)
         {
             // We multiply the product of width and height by 4 because each byte
-            // will represent a different color channel per pixel in the final iamge.
+            // will represent a different color channel per iRobotKinect in the final iamge.
             byte[] colorFrame = new byte[width * height * 4];
 
             // Process each row in parallel
             Parallel.For(0, 240, depthArrayRowIndex =>
             {
-                // Process each pixel in the row
+                // Process each iRobotKinect in the row
                 for (int depthArrayColumnIndex = 0; depthArrayColumnIndex < 320; depthArrayColumnIndex++)
                 {
                     var distanceIndex = depthArrayColumnIndex + (depthArrayRowIndex * 320);
 
                     // Because the colorFrame we are creating has four times as many bytes representing
-                    // a pixel in the final image, we set the index to for times of the depth index.
+                    // a iRobotKinect in the final image, we set the index to for times of the depth index.
                     var index = distanceIndex * 4;
 
                     // Map the distance to an intesity that can be represented in RGB

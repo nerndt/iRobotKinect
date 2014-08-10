@@ -121,11 +121,11 @@ namespace iRobotKinect
             //            imagePointer1[1] = (byte)GreyImage[j, i];
             //            imagePointer1[2] = (byte)GreyImage[j, i];
             //            imagePointer1[3] = (byte)255;
-            //            //4 bytes per pixel
+            //            //4 bytes per Pixel
             //            imagePointer1 += 4;
             //        }//end for j
 
-            //        //4 bytes per pixel
+            //        //4 bytes per Pixel
             //        imagePointer1 += (bitmapData1.Stride - (bitmapData1.Width * 4));
             //    }//end for i
             //}//end unsafe
@@ -170,10 +170,10 @@ namespace iRobotKinect
             //            imagePointer1[1] = (byte)((int)(GreyImage[j, i]));
             //            imagePointer1[2] = (byte)((int)(GreyImage[j, i]));
             //            imagePointer1[3] = (byte)255;
-            //            //4 bytes per pixel
+            //            //4 bytes per Pixel
             //            imagePointer1 += 4;
             //        }   //end for j
-            //        //4 bytes per pixel
+            //        //4 bytes per Pixel
             //        imagePointer1 += (bitmapData1.Stride - (bitmapData1.Width * 4));
             //    }//End for i
             //}//end unsafe
@@ -218,10 +218,10 @@ namespace iRobotKinect
             //            imagePointer1[1] = (byte)GreyImage[j, i];
             //            imagePointer1[2] = (byte)GreyImage[j, i];
             //            imagePointer1[3] = (byte)255;
-            //            //4 bytes per pixel
+            //            //4 bytes per Pixel
             //            imagePointer1 += 4;
             //        }   //end for j
-            //        //4 bytes per pixel
+            //        //4 bytes per Pixel
             //        imagePointer1 += (bitmapData1.Stride - (bitmapData1.Width * 4));
             //    }//End for i
             //}//end unsafe
@@ -267,10 +267,10 @@ namespace iRobotKinect
             //        for (j = 0; j < bitmapData1.Width; j++)
             //        {
             //            GreyImage[j, i] = (int)((imagePointer1[0] + imagePointer1[1] + imagePointer1[2]) / 3.0);
-            //            //4 bytes per pixel
+            //            //4 bytes per Pixel
             //            imagePointer1 += 4;
             //        }//end for j
-            //        //4 bytes per pixel
+            //        //4 bytes per Pixel
             //        imagePointer1 += bitmapData1.Stride - (bitmapData1.Width * 4);
             //    }//end for i
             //}//end unsafe

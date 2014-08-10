@@ -35,13 +35,13 @@ namespace iRobotKinect
                 Width = source.Width;
                 Height = source.Height;
 
-                // get total locked pixels count
+                // get total locked Pixels count
                 int PixelCount = Width * Height;
 
                 // Create rectangle to lock
                 Rectangle rect = new Rectangle(0, 0, Width, Height);
 
-                // get source bitmap pixel format size
+                // get source bitmap Pixel format size
                 Depth = System.Drawing.Bitmap.GetPixelFormatSize(source.PixelFormat);
 
                 // Check if bpp (Bits Per Pixel) is 8, 24, or 32
@@ -54,7 +54,7 @@ namespace iRobotKinect
                 bitmapData = source.LockBits(rect, ImageLockMode.ReadWrite,
                                              source.PixelFormat);
 
-                // create byte array to copy pixel values
+                // create byte array to copy Pixel values
                 int step = Depth / 8;
                 Pixels = new byte[PixelCount * step];
                 Iptr = bitmapData.Scan0;
@@ -88,7 +88,7 @@ namespace iRobotKinect
         }
 
         /// <summary>
-        /// Get the color of the specified pixel
+        /// Get the color of the specified Pixel
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
@@ -100,7 +100,7 @@ namespace iRobotKinect
             // Get color components count
             int cCount = Depth / 8;
 
-            // Get start index of the specified pixel
+            // Get start index of the specified Pixel
             int i = ((y * Width) + x) * cCount;
 
             if (i > Pixels.Length - cCount)
@@ -131,7 +131,7 @@ namespace iRobotKinect
         }
 
         /// <summary>
-        /// Set the color of the specified pixel
+        /// Set the color of the specified Pixel
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
@@ -141,7 +141,7 @@ namespace iRobotKinect
             // Get color components count
             int cCount = Depth / 8;
 
-            // Get start index of the specified pixel
+            // Get start index of the specified Pixel
             int i = ((y * Width) + x) * cCount;
 
             if (Depth == 32) // For 32 bpp set Red, Green, Blue and Alpha

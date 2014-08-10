@@ -160,8 +160,8 @@ namespace iRobotKinect
             }
         }
 
-        private frmStart startForm = null;
-        public frmStart StartForm
+        private MainForm startForm = null;
+        public MainForm StartForm
         {
             get
             {

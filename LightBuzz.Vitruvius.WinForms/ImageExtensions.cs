@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using Microsoft.Kinect;
 
-namespace iRobotKinect.WinForms
+namespace iRobotKinect
 {
     /// <summary>
     /// Provides some common functionality for manipulating WinForms bitmap images.
@@ -21,7 +21,7 @@ namespace iRobotKinect.WinForms
         static readonly double DPI = 96;
 
         #endregion
-                
+
         #region Public methods
 
         /// <summary>
