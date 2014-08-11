@@ -94,6 +94,18 @@ namespace iRobotKinect
 
         public MainForm()
         {
+            InitAll();
+        }
+
+        public MainForm(string[] args = null, CMDLineParser parser = null)
+        {
+            InitAll();
+        }
+
+        public void InitAll()
+        {
+            CRMainForm = this;
+
             InitializeComponent();
             Init();
         }
@@ -102,6 +114,10 @@ namespace iRobotKinect
         {
             if (!this.DesignMode)
             {
+                // This will force the MainForm to show up on top
+                TopMost = true;
+                TopMost = false;
+
                 Program.UI = new RoombaUI();
             }
         }
@@ -126,6 +142,11 @@ namespace iRobotKinect
 
         private void frmStart_Load(object sender, EventArgs e)
         {
+            if (this.DesignMode)
+            {
+                return;
+            }
+
             Program.UI.CurrentRoomba = new Roomba_Poller();
             this.LoadForm();
 
@@ -140,6 +161,8 @@ namespace iRobotKinect
         private void frmStart_FormClosing(object sender, FormClosingEventArgs e)
         {
             this._Stop(false, true);
+            
+            //Application.Exit();  // Quit itself
         }
 
         #region Buttons
@@ -148,6 +171,7 @@ namespace iRobotKinect
         {
             this.Close();
         }
+        
         private void btnMinimize_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
@@ -1097,12 +1121,6 @@ namespace iRobotKinect
             frm.Dock = DockStyle.Fill;
             frm.Visible = true;
             ctl.Controls.Add(frm);
-        }
-
-        private void buttonExit_Click(object sender, EventArgs e)
-        {
-            // Close the application
-            this.Close();
         }
 
         #region Code below for passing commands to other instances of Pixel

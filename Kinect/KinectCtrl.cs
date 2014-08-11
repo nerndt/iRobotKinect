@@ -15,12 +15,15 @@ namespace iRobotKinect
         public KinectCtrl()
         {
             InitializeComponent();
-            KinectForm kinectForm = new KinectForm();
-            kinectForm.TopLevel = false;
-            kinectForm.Location = new Point(0, 0);
-            kinectForm.FormBorderStyle = FormBorderStyle.None;
-            kinectForm.Visible = true;
-            this.Controls.Add(kinectForm);
+            if (!this.DesignMode)
+            {
+                KinectForm kinectForm = new KinectForm();
+                kinectForm.TopLevel = false;
+                kinectForm.Location = new Point(0, 0);
+                kinectForm.FormBorderStyle = FormBorderStyle.None;
+                kinectForm.Visible = true;
+                this.Controls.Add(kinectForm);
+            }
         }
     }
 }

@@ -280,7 +280,7 @@ namespace iRobotKinect
 
         static void OnGlobalMouseMove(object sender, MouseEventArgs e)
         {
-            if (MainForm.CRMainForm.ActiveControl != null)
+            if (MainForm.CRMainForm != null && MainForm.CRMainForm.ActiveControl != null)
             {
                 if (MainForm.CRMainForm.ActiveControl.GetType() == MainForm.CRMainForm.GetType()) // Not working properly!!  || MainForm.CRMainForm.ActiveControl.GetType() == MainForm.CRMainForm.splitContainerMain1.GetType())
                 {
@@ -291,7 +291,7 @@ namespace iRobotKinect
 
         static void OnGlobalMouseUp(object sender, MouseEventArgs e)
         {
-            if (MainForm.CRMainForm.ActiveControl != null)
+            if (MainForm.CRMainForm != null && MainForm.CRMainForm.ActiveControl != null)
             {
                 if (MainForm.CRMainForm.ActiveControl.GetType() == MainForm.CRMainForm.GetType()) // Not working properly!!  || MainForm.CRMainForm.ActiveControl.GetType() == MainForm.CRMainForm.splitContainerMain1.GetType())
                 {
@@ -302,7 +302,7 @@ namespace iRobotKinect
 
         static void OnGlobalMouseDown(object sender, MouseEventArgs e)
         {
-            if (MainForm.CRMainForm.ActiveControl != null)
+            if (MainForm.CRMainForm != null && MainForm.CRMainForm.ActiveControl != null)
             {
                 if (MainForm.CRMainForm.ActiveControl.GetType() == MainForm.CRMainForm.GetType()) // Not working properly!! || MainForm.CRMainForm.ActiveControl.GetType() == MainForm.CRMainForm.splitContainerMain1.GetType())
                 {

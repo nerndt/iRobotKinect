@@ -874,7 +874,7 @@ namespace iRobotKinect
             this.lrSpeed.Size = new System.Drawing.Size(39, 20);
             this.lrSpeed.TabIndex = 327;
             this.lrSpeed.Value = new decimal(new int[] {
-            20,
+            40,
             0,
             0,
             0});
@@ -1283,7 +1283,7 @@ namespace iRobotKinect
             this.udSpeedStep.Size = new System.Drawing.Size(52, 20);
             this.udSpeedStep.TabIndex = 320;
             this.udSpeedStep.Value = new decimal(new int[] {
-            20,
+            60,
             0,
             0,
             0});

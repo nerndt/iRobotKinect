@@ -127,11 +127,10 @@ namespace iRobotKinect
             this.tabConfig = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
             this.loadMacro = new System.Windows.Forms.OpenFileDialog();
-            this.buttonExit = new System.Windows.Forms.Button();
-            this.labelSpeech = new System.Windows.Forms.Label();
             this.labelSpeechCommand = new System.Windows.Forms.Label();
-            this.labelGesture = new System.Windows.Forms.Label();
             this.labelGestureCommand = new System.Windows.Forms.Label();
+            this.checkBoxSpeech = new System.Windows.Forms.CheckBox();
+            this.checkBoxGesture = new System.Windows.Forms.CheckBox();
             this.cmConnectionMenu.SuspendLayout();
             this.tabStart.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -544,10 +543,11 @@ namespace iRobotKinect
             this.lblFormTimer.AutoSize = true;
             this.lblFormTimer.BackColor = System.Drawing.Color.Transparent;
             this.lblFormTimer.ContextMenuStrip = this.cmConnectionMenu;
-            this.lblFormTimer.Location = new System.Drawing.Point(198, 11);
+            this.lblFormTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFormTimer.Location = new System.Drawing.Point(199, 55);
             this.lblFormTimer.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblFormTimer.Name = "lblFormTimer";
-            this.lblFormTimer.Size = new System.Drawing.Size(64, 13);
+            this.lblFormTimer.Size = new System.Drawing.Size(185, 31);
             this.lblFormTimer.TabIndex = 305;
             this.lblFormTimer.Text = "...................";
             this.lblFormTimer.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -569,10 +569,11 @@ namespace iRobotKinect
             this.lblFormUpdated.BackColor = System.Drawing.Color.Transparent;
             this.lblFormUpdated.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblFormUpdated.ContextMenuStrip = this.cmConnectionMenu;
-            this.lblFormUpdated.Location = new System.Drawing.Point(199, 4);
+            this.lblFormUpdated.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFormUpdated.Location = new System.Drawing.Point(212, 18);
             this.lblFormUpdated.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblFormUpdated.Name = "lblFormUpdated";
-            this.lblFormUpdated.Size = new System.Drawing.Size(63, 15);
+            this.lblFormUpdated.Size = new System.Drawing.Size(151, 43);
             this.lblFormUpdated.TabIndex = 306;
             this.lblFormUpdated.Text = "Current";
             this.lblFormUpdated.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -582,10 +583,11 @@ namespace iRobotKinect
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(114, 6);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(0, 24);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(80, 13);
+            this.label3.Size = new System.Drawing.Size(214, 31);
             this.label3.TabIndex = 307;
             this.label3.Text = "Roomba Status";
             // 
@@ -643,7 +645,7 @@ namespace iRobotKinect
             this.tabStart.Name = "tabStart";
             this.tabStart.Padding = new System.Windows.Forms.Padding(2);
             this.tabStart.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.tabStart.Size = new System.Drawing.Size(1250, 668);
+            this.tabStart.Size = new System.Drawing.Size(1250, 615);
             this.tabStart.TabIndex = 0;
             this.tabStart.Text = "Start";
             this.toolTip1.SetToolTip(this.tabStart, "To Start: Right Click on form & Select Polling>Start");
@@ -788,14 +790,14 @@ namespace iRobotKinect
             this.tabControl1.Controls.Add(this.tabDrive);
             this.tabControl1.Controls.Add(this.tabStart);
             this.tabControl1.Controls.Add(this.tabConfig);
-            this.tabControl1.Location = new System.Drawing.Point(2, 24);
+            this.tabControl1.Location = new System.Drawing.Point(2, 77);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tabControl1.RightToLeftLayout = true;
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1258, 694);
+            this.tabControl1.Size = new System.Drawing.Size(1258, 641);
             this.tabControl1.TabIndex = 311;
             // 
             // tabKinect
@@ -803,7 +805,7 @@ namespace iRobotKinect
             this.tabKinect.Controls.Add(this.panelKinect);
             this.tabKinect.Location = new System.Drawing.Point(4, 22);
             this.tabKinect.Name = "tabKinect";
-            this.tabKinect.Size = new System.Drawing.Size(1250, 668);
+            this.tabKinect.Size = new System.Drawing.Size(1250, 615);
             this.tabKinect.TabIndex = 3;
             this.tabKinect.Text = "Kinect";
             this.tabKinect.UseVisualStyleBackColor = true;
@@ -814,7 +816,7 @@ namespace iRobotKinect
             this.panelKinect.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelKinect.Location = new System.Drawing.Point(0, 0);
             this.panelKinect.Name = "panelKinect";
-            this.panelKinect.Size = new System.Drawing.Size(1250, 668);
+            this.panelKinect.Size = new System.Drawing.Size(1250, 615);
             this.panelKinect.TabIndex = 0;
             // 
             // kinectCtrl1
@@ -822,7 +824,7 @@ namespace iRobotKinect
             this.kinectCtrl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kinectCtrl1.Location = new System.Drawing.Point(0, 0);
             this.kinectCtrl1.Name = "kinectCtrl1";
-            this.kinectCtrl1.Size = new System.Drawing.Size(1250, 668);
+            this.kinectCtrl1.Size = new System.Drawing.Size(1250, 615);
             this.kinectCtrl1.TabIndex = 0;
             // 
             // tabDrive
@@ -843,7 +845,7 @@ namespace iRobotKinect
             this.tabDrive.Controls.Add(this.labelInstructions);
             this.tabDrive.Location = new System.Drawing.Point(4, 22);
             this.tabDrive.Name = "tabDrive";
-            this.tabDrive.Size = new System.Drawing.Size(1250, 668);
+            this.tabDrive.Size = new System.Drawing.Size(1250, 615);
             this.tabDrive.TabIndex = 2;
             this.tabDrive.Text = "Drive";
             this.tabDrive.UseVisualStyleBackColor = true;
@@ -990,7 +992,7 @@ namespace iRobotKinect
             this.tabConfig.Margin = new System.Windows.Forms.Padding(2);
             this.tabConfig.Name = "tabConfig";
             this.tabConfig.Padding = new System.Windows.Forms.Padding(2);
-            this.tabConfig.Size = new System.Drawing.Size(1250, 668);
+            this.tabConfig.Size = new System.Drawing.Size(1250, 615);
             this.tabConfig.TabIndex = 1;
             this.tabConfig.Text = "Config";
             this.tabConfig.UseVisualStyleBackColor = true;
@@ -1005,59 +1007,53 @@ namespace iRobotKinect
             this.label2.TabIndex = 1;
             this.label2.Text = "Move this to Config Form";
             // 
-            // buttonExit
-            // 
-            this.buttonExit.BackColor = System.Drawing.Color.Red;
-            this.buttonExit.FlatAppearance.BorderSize = 0;
-            this.buttonExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonExit.Location = new System.Drawing.Point(1210, 4);
-            this.buttonExit.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonExit.Name = "buttonExit";
-            this.buttonExit.Size = new System.Drawing.Size(46, 20);
-            this.buttonExit.TabIndex = 326;
-            this.buttonExit.Text = "Exit";
-            this.buttonExit.UseVisualStyleBackColor = false;
-            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
-            // 
-            // labelSpeech
-            // 
-            this.labelSpeech.AutoSize = true;
-            this.labelSpeech.Location = new System.Drawing.Point(430, 6);
-            this.labelSpeech.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelSpeech.Name = "labelSpeech";
-            this.labelSpeech.Size = new System.Drawing.Size(97, 13);
-            this.labelSpeech.TabIndex = 327;
-            this.labelSpeech.Text = "Speech Command:";
-            // 
             // labelSpeechCommand
             // 
             this.labelSpeechCommand.AutoSize = true;
-            this.labelSpeechCommand.Location = new System.Drawing.Point(531, 6);
+            this.labelSpeechCommand.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSpeechCommand.Location = new System.Drawing.Point(558, 24);
             this.labelSpeechCommand.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelSpeechCommand.Name = "labelSpeechCommand";
-            this.labelSpeechCommand.Size = new System.Drawing.Size(33, 13);
+            this.labelSpeechCommand.Size = new System.Drawing.Size(83, 31);
             this.labelSpeechCommand.TabIndex = 328;
             this.labelSpeechCommand.Text = "None";
-            // 
-            // labelGesture
-            // 
-            this.labelGesture.AutoSize = true;
-            this.labelGesture.Location = new System.Drawing.Point(730, 6);
-            this.labelGesture.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelGesture.Name = "labelGesture";
-            this.labelGesture.Size = new System.Drawing.Size(97, 13);
-            this.labelGesture.TabIndex = 327;
-            this.labelGesture.Text = "Gesture Command:";
             // 
             // labelGestureCommand
             // 
             this.labelGestureCommand.AutoSize = true;
-            this.labelGestureCommand.Location = new System.Drawing.Point(831, 6);
+            this.labelGestureCommand.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelGestureCommand.Location = new System.Drawing.Point(872, 24);
             this.labelGestureCommand.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelGestureCommand.Name = "labelGestureCommand";
-            this.labelGestureCommand.Size = new System.Drawing.Size(33, 13);
+            this.labelGestureCommand.Size = new System.Drawing.Size(83, 31);
             this.labelGestureCommand.TabIndex = 328;
             this.labelGestureCommand.Text = "None";
+            // 
+            // checkBoxSpeech
+            // 
+            this.checkBoxSpeech.AutoSize = true;
+            this.checkBoxSpeech.Checked = true;
+            this.checkBoxSpeech.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxSpeech.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxSpeech.Location = new System.Drawing.Point(415, 21);
+            this.checkBoxSpeech.Name = "checkBoxSpeech";
+            this.checkBoxSpeech.Size = new System.Drawing.Size(138, 37);
+            this.checkBoxSpeech.TabIndex = 329;
+            this.checkBoxSpeech.Text = "Speech";
+            this.checkBoxSpeech.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxGesture
+            // 
+            this.checkBoxGesture.AutoSize = true;
+            this.checkBoxGesture.Checked = true;
+            this.checkBoxGesture.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxGesture.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxGesture.Location = new System.Drawing.Point(722, 21);
+            this.checkBoxGesture.Name = "checkBoxGesture";
+            this.checkBoxGesture.Size = new System.Drawing.Size(145, 37);
+            this.checkBoxGesture.TabIndex = 330;
+            this.checkBoxGesture.Text = "Gesture";
+            this.checkBoxGesture.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -1065,23 +1061,21 @@ namespace iRobotKinect
             this.CancelButton = this.btnShutDown;
             this.ClientSize = new System.Drawing.Size(1260, 717);
             this.ContextMenuStrip = this.cmConnectionMenu;
-            this.ControlBox = false;
+            this.Controls.Add(this.checkBoxGesture);
+            this.Controls.Add(this.checkBoxSpeech);
             this.Controls.Add(this.labelGestureCommand);
-            this.Controls.Add(this.labelGesture);
             this.Controls.Add(this.labelSpeechCommand);
-            this.Controls.Add(this.labelSpeech);
-            this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.lblFormUpdated);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lblFormTimer);
             this.Controls.Add(this.tabControl1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(1276, 756);
+            this.MinimumSize = new System.Drawing.Size(500, 500);
             this.Name = "MainForm";
             this.ShowInTaskbar = true;
-            this.Text = "Roomba-Create Kinect Startup";
+            this.Text = "iRobotKinect";
             this.toolTip1.SetToolTip(this, "Right-Click to Start Roomba");
-            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmStart_FormClosing);
             this.Load += new System.EventHandler(this.frmStart_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
@@ -1091,11 +1085,10 @@ namespace iRobotKinect
             this.Controls.SetChildIndex(this.lblFormTimer, 0);
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.lblFormUpdated, 0);
-            this.Controls.SetChildIndex(this.buttonExit, 0);
-            this.Controls.SetChildIndex(this.labelSpeech, 0);
             this.Controls.SetChildIndex(this.labelSpeechCommand, 0);
-            this.Controls.SetChildIndex(this.labelGesture, 0);
             this.Controls.SetChildIndex(this.labelGestureCommand, 0);
+            this.Controls.SetChildIndex(this.checkBoxSpeech, 0);
+            this.Controls.SetChildIndex(this.checkBoxGesture, 0);
             this.cmConnectionMenu.ResumeLayout(false);
             this.tabStart.ResumeLayout(false);
             this.tabStart.PerformLayout();
@@ -1211,10 +1204,9 @@ namespace iRobotKinect
         public System.Windows.Forms.PictureBox pictureBoxLocationMap;
         private System.Windows.Forms.Panel panelKinect;
         private KinectCtrl kinectCtrl1;
-        private System.Windows.Forms.Button buttonExit;
-        private System.Windows.Forms.Label labelSpeech;
         public System.Windows.Forms.Label labelSpeechCommand;
-        private System.Windows.Forms.Label labelGesture;
         public System.Windows.Forms.Label labelGestureCommand;
+        public System.Windows.Forms.CheckBox checkBoxSpeech;
+        public System.Windows.Forms.CheckBox checkBoxGesture;
     }
 }

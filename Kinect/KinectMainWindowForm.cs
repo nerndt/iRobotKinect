@@ -38,7 +38,7 @@ namespace iRobotKinect
         /// Active Kinect sensor
         private KinectSensor sensor;
         private short fpsEnd = 1;
-        private MyWrite NGEFile;
+        private MyWrite MyFile;
         Bitmap tempColorFrame;
         bool windowClosing = false;
         int initFrames = 1;
@@ -105,34 +105,33 @@ namespace iRobotKinect
         public KinectForm()
         {
             InitializeComponent();
-            Init();
+            if (!this.DesignMode)
+            {
+                Init();
 
-            Cursor.Current = Cursors.WaitCursor;
-            start();
+                Cursor.Current = Cursors.WaitCursor;
+                start();
+            }
         }
 
         private void Init()
         {
-            if (!this.DesignMode)
+            ColorMapExt cmap = new ColorMapExt();
+            Heatmap = cmap.Heatmap();
+
+            useFiltering = checkBoxDepthUseFiltering.Checked;
+            useAverage = checkBoxDepthUseAverage.Checked;
+            innerBandThreshold = (int)trackBarDepthInnerBand.Value;
+            outerBandThreshold = (int)trackBarDepthOuterBand.Value;
+            averageFrameCount = (int)trackBarDepthFramesToAverage.Value;
+
+            // Sets the camera elevation angle
+            //this.sensor.ElevationAngle = Convert.ToInt32(this.textboxElevationAngle.Text);
+
+            // Lookup table for all possible depth values (0 - 2047)
+            for (int i = 0; i < DepthLookUp.Length; i++)
             {
-                ColorMapExt cmap = new ColorMapExt();
-                Heatmap = cmap.Heatmap();
-
-                useFiltering = checkBoxDepthUseFiltering.Checked;
-                useAverage = checkBoxDepthUseAverage.Checked;
-                innerBandThreshold = (int)trackBarDepthInnerBand.Value;
-                outerBandThreshold = (int)trackBarDepthOuterBand.Value;
-                averageFrameCount = (int)trackBarDepthFramesToAverage.Value;
-
-                // Sets the camera elevation angle
-                //this.sensor.ElevationAngle = Convert.ToInt32(this.textboxElevationAngle.Text);
-
-                // Lookup table for all possible depth values (0 - 2047)
-                for (int i = 0; i < DepthLookUp.Length; i++)
-                {
-                    DepthLookUp[i] = rawDepthToMeters(i);
-                }
-
+                DepthLookUp[i] = rawDepthToMeters(i);
             }
         }
 
@@ -143,120 +142,123 @@ namespace iRobotKinect
 
         private void start()
         {
-            if (sensor == null)
+            if (!this.DesignMode)
             {
-                // Look through all sensors and start the first connected one.
-                // This requires that a Kinect is connected at the time of app startup.
-                // To make your app robust against plug/unplug, 
-                // it is recommended to use KinectSensorChooser provided in Microsoft.Kinect.Toolkit (See components in Toolkit Browser).
-                foreach (var potentialSensor in KinectSensor.KinectSensors)
+
+                if (sensor == null)
                 {
-                    this.textBox_sensorStatus.Text = "Searching...";
-                    if (potentialSensor.Status == KinectStatus.Connected)
+                    // Look through all sensors and start the first connected one.
+                    // This requires that a Kinect is connected at the time of app startup.
+                    // To make your app robust against plug/unplug, 
+                    // it is recommended to use KinectSensorChooser provided in Microsoft.Kinect.Toolkit (See components in Toolkit Browser).
+                    foreach (var potentialSensor in KinectSensor.KinectSensors)
                     {
-                        this.sensor = potentialSensor;
-                        break;
-                    }
-                }
-
-                if (null != this.sensor)
-                {
-                    TransformSmoothParameters smoothingParam = new TransformSmoothParameters();
-
-                    if (radioButton_smoothDefault.Checked)
-                    {
-                        // Some smoothing with little latency (defaults).
-                        // Only filters out small jitters.
-                        // Good for gesture recognition in games.
-                        smoothingParam = new TransformSmoothParameters();
+                        this.textBox_sensorStatus.Text = "Searching...";
+                        if (potentialSensor.Status == KinectStatus.Connected)
                         {
-                            smoothingParam.Smoothing = 0.5f;
-                            smoothingParam.Correction = 0.5f;
-                            smoothingParam.Prediction = 0.5f;
-                            smoothingParam.JitterRadius = 0.05f;
-                            smoothingParam.MaxDeviationRadius = 0.04f;
-                        };
-                    }
-                    else if (radioButton_smoothModerate.Checked)
-                    {
-
-                        // Smoothed with some latency.
-                        // Filters out medium jitters.
-                        // Good for a menu system that needs to be smooth but
-                        // doesn't need the reduced latency as much as gesture recognition does.
-                        smoothingParam = new TransformSmoothParameters();
-                        {
-                            smoothingParam.Smoothing = 0.5f;
-                            smoothingParam.Correction = 0.1f;
-                            smoothingParam.Prediction = 0.5f;
-                            smoothingParam.JitterRadius = 0.1f;
-                            smoothingParam.MaxDeviationRadius = 0.1f;
-                        };
-                    }
-                    else if (radioButton_smoothIntense.Checked)
-                    {
-                        // Very smooth, but with a lot of latency.
-                        // Filters out large jitters.
-                        // Good for situations where smooth data is absolutely required
-                        // and latency is not an issue.
-                        smoothingParam = new TransformSmoothParameters();
-                        {
-                            smoothingParam.Smoothing = 0.7f;
-                            smoothingParam.Correction = 0.3f;
-                            smoothingParam.Prediction = 1.0f;
-                            smoothingParam.JitterRadius = 1.0f;
-                            smoothingParam.MaxDeviationRadius = 1.0f;
-                        };
-                    }
-                    groupBox_smooth.Enabled = false;
-
-                    // Turn on the stream to receive frames
-                    this.sensor.ColorStream.Enable(ColorImageFormat.RgbResolution640x480Fps30);
-                    this.sensor.DepthStream.Enable(DepthImageFormat.Resolution640x480Fps30);
-                    this.sensor.SkeletonStream.Enable(smoothingParam);
-                    this.sensor.SkeletonStream.TrackingMode = SkeletonTrackingMode.Seated; // SkeletonTrackingMode.Default standing
-                    this.sensor.SkeletonStream.EnableTrackingInNearRange = true;
-
-                    // event handler to be called whenever there is new frame data
-                    this.sensor.AllFramesReady += sensor_allFramesReady;
-
-                    // Start the sensor!
-                    try
-                    {
-                        this.sensor.Start();
-                        this.textBox_sensorStatus.Text = "Stream started";
-
-                        // Start speech recognizer after KinectSensor started successfully.
-                        this.mySpeechRecognizer = SpeechRecognizer.Create();
-
-                        if (null != this.mySpeechRecognizer)
-                        {
-                            this.mySpeechRecognizer.SaidSomething += this.RecognizerSaidSomething;
-                            this.mySpeechRecognizer.Start(sensor.AudioSource);
+                            this.sensor = potentialSensor;
+                            break;
                         }
-
-                        _gestureController = new GestureController(GestureType.All);
-                        _gestureController.GestureRecognized += GestureController_GestureRecognized;
-
-
                     }
-                    catch (Exception)
+
+                    if (null != this.sensor)
                     {
-                        this.sensor = null;
-                        this.textBox_sensorStatus.Text = "Stream not started";
+                        TransformSmoothParameters smoothingParam = new TransformSmoothParameters();
+
+                        if (radioButton_smoothDefault.Checked)
+                        {
+                            // Some smoothing with little latency (defaults).
+                            // Only filters out small jitters.
+                            // Good for gesture recognition in games.
+                            smoothingParam = new TransformSmoothParameters();
+                            {
+                                smoothingParam.Smoothing = 0.5f;
+                                smoothingParam.Correction = 0.5f;
+                                smoothingParam.Prediction = 0.5f;
+                                smoothingParam.JitterRadius = 0.05f;
+                                smoothingParam.MaxDeviationRadius = 0.04f;
+                            };
+                        }
+                        else if (radioButton_smoothModerate.Checked)
+                        {
+
+                            // Smoothed with some latency.
+                            // Filters out medium jitters.
+                            // Good for a menu system that needs to be smooth but
+                            // doesn't need the reduced latency as much as gesture recognition does.
+                            smoothingParam = new TransformSmoothParameters();
+                            {
+                                smoothingParam.Smoothing = 0.5f;
+                                smoothingParam.Correction = 0.1f;
+                                smoothingParam.Prediction = 0.5f;
+                                smoothingParam.JitterRadius = 0.1f;
+                                smoothingParam.MaxDeviationRadius = 0.1f;
+                            };
+                        }
+                        else if (radioButton_smoothIntense.Checked)
+                        {
+                            // Very smooth, but with a lot of latency.
+                            // Filters out large jitters.
+                            // Good for situations where smooth data is absolutely required
+                            // and latency is not an issue.
+                            smoothingParam = new TransformSmoothParameters();
+                            {
+                                smoothingParam.Smoothing = 0.7f;
+                                smoothingParam.Correction = 0.3f;
+                                smoothingParam.Prediction = 1.0f;
+                                smoothingParam.JitterRadius = 1.0f;
+                                smoothingParam.MaxDeviationRadius = 1.0f;
+                            };
+                        }
+                        groupBox_smooth.Enabled = false;
+
+                        // Turn on the stream to receive frames
+                        this.sensor.ColorStream.Enable(ColorImageFormat.RgbResolution640x480Fps30);
+                        this.sensor.DepthStream.Enable(DepthImageFormat.Resolution640x480Fps30);
+                        this.sensor.SkeletonStream.Enable(smoothingParam);
+                        this.sensor.SkeletonStream.TrackingMode = SkeletonTrackingMode.Default; // SkeletonTrackingMode.Seated; // SkeletonTrackingMode.Default standing
+                        this.sensor.SkeletonStream.EnableTrackingInNearRange = true;
+
+                        // event handler to be called whenever there is new frame data
+                        this.sensor.AllFramesReady += sensor_allFramesReady;
+
+                        // Start the sensor!
+                        try
+                        {
+                            this.sensor.Start();
+                            this.textBox_sensorStatus.Text = "Stream started";
+
+                            // Start speech recognizer after KinectSensor started successfully.
+                            this.mySpeechRecognizer = SpeechRecognizer.Create();
+
+                            if (null != this.mySpeechRecognizer)
+                            {
+                                this.mySpeechRecognizer.SaidSomething += this.RecognizerSaidSomething;
+                                this.mySpeechRecognizer.Start(sensor.AudioSource);
+                            }
+
+                            _gestureController = new GestureController(GestureType.All);
+                            _gestureController.GestureRecognized += GestureController_GestureRecognized;
+
+
+                        }
+                        catch (Exception)
+                        {
+                            this.sensor = null;
+                            this.textBox_sensorStatus.Text = "Stream not started";
+                        }
                     }
-                }
-                else
-                {
-                    this.textBox_sensorStatus.Text = "Kinect not found";
+                    else
+                    {
+                        this.textBox_sensorStatus.Text = "Kinect not found";
+                    }
                 }
             }
-
         }
 
         private void button_stop_Click(object sender, EventArgs e)
         {
-            if (NGEFile != null)
+            if (MyFile != null)
             {
                 this.textBox_sensorStatus.Text = "First Recording stopped!";
             }
@@ -491,10 +493,16 @@ namespace iRobotKinect
 
         void sensor_allFramesReady(object sender, AllFramesReadyEventArgs e)
         {
+            if (this.DesignMode)
+            {
+                return;
+            }
+            
             if (windowClosing)
             {
                 return;
             }
+
             int value;
             if (int.TryParse(this.textBox_init.Text, out value))
             {
@@ -535,19 +543,22 @@ namespace iRobotKinect
                 }
                 #endregion set FramesPerSecond
 
+                tempColorFrame = null;
+                #region ColorImage
                 using (ColorImageFrame colorFrame = e.OpenColorImageFrame())
                 {
                     if (colorFrame != null)
                     {
                         // Kinect Color Frame to Bitmap
-                        tempColorFrame = ColorImageFrameToBitmap(colorFrame);
-                        this.pictureBox_colorPic.BackgroundImage = tempColorFrame; // this.pictureBox_colorPic.Image = new Bitmap(tempColorFrame, this.pictureBox_colorPic.Width, this.pictureBox_colorPic.Height);
+                        tempColorFrame = (Bitmap)ColorImageFrameToBitmap(colorFrame); // BitmapManipulator.MirrorXBitmap((Bitmap)ColorImageFrameToBitmap(colorFrame));
                         
                         // Too slow if not scaled down by 10x
                         //this.pictureBox_colorPic.BackgroundImage = BitmapManipulator.ConvertImageToHeatmapBitMap(BitmapManipulator.ScaleBitmap(tempColorFrame, 0.1, 0.1, System.Drawing.Drawing2D.InterpolationMode.Default), Heatmap, false);
                     }
                 }
+                #endregion ColorImage
 
+                #region Depth
                 using (DepthImageFrame depthFrame = e.OpenDepthImageFrame())
                 {
                     if (depthFrame != null)
@@ -560,60 +571,74 @@ namespace iRobotKinect
 
                         depthBmp = ImageHelpers.SliceDepthImage(depthFrame, (int)trackBarDepthMinDistance.Value, (int)trackBarDepthMaxDistance.Value);
 
-                        Image<Bgr, Byte> openCVImg = new Image<Bgr, byte>(depthBmp);
-                        Image<Gray, byte> gray_image = openCVImg.Convert<Gray, byte>();
-
-                        using (MemStorage stor = new MemStorage())
+                        try
                         {
-                            //Find contours with no holes try CV_RETR_EXTERNAL to find holes
-                            Contour<System.Drawing.Point> contours = gray_image.FindContours(
-                             Emgu.CV.CvEnum.CHAIN_APPROX_METHOD.CV_CHAIN_APPROX_SIMPLE,
-                             Emgu.CV.CvEnum.RETR_TYPE.CV_RETR_EXTERNAL,
-                             stor);
+                            Image<Bgr, Byte> openCVImg = new Image<Bgr, byte>(depthBmp);
+                            Image<Gray, byte> gray_image = openCVImg.Convert<Gray, byte>();
 
-                            for (int i = 0; contours != null; contours = contours.HNext)
+                            using (MemStorage stor = new MemStorage())
                             {
-                                i++;
+                                //Find contours with no holes try CV_RETR_EXTERNAL to find holes
+                                Contour<System.Drawing.Point> contours = gray_image.FindContours(
+                                 Emgu.CV.CvEnum.CHAIN_APPROX_METHOD.CV_CHAIN_APPROX_SIMPLE,
+                                 Emgu.CV.CvEnum.RETR_TYPE.CV_RETR_EXTERNAL,
+                                 stor);
 
-                                if ((contours.Area > Math.Pow(trackBarObjectMinSize.Value, 2)) && (contours.Area < Math.Pow(trackBarObjectMaxSize.Value, 2)))
+                                for (int i = 0; contours != null; contours = contours.HNext)
                                 {
-                                    MCvBox2D box = contours.GetMinAreaRect();
-                                    openCVImg.Draw(box, new Bgr(System.Drawing.Color.Red), 2);
-                                    objectsFound++;
+                                    i++;
+
+                                    if ((contours.Area > Math.Pow(trackBarObjectMinSize.Value, 2)) && (contours.Area < Math.Pow(trackBarObjectMaxSize.Value, 2)))
+                                    {
+                                        MCvBox2D box = contours.GetMinAreaRect();
+                                        openCVImg.Draw(box, new Bgr(System.Drawing.Color.Red), 2);
+                                        objectsFound++;
+                                    }
                                 }
                             }
+
+                            pictureBox_depthPicSmoothed.BackgroundImage = openCVImg.Bitmap;
+                            richTextBoxObjectFound.Text = objectsFound.ToString();
+                            // The Smoothed Image will apply both a filter and a weighted moving average over the
+                            // depth data from the Kinect (depending on UI selections)
+                            //pictureBox_depthPicSmoothed.BackgroundImage = CreateSmoothImageFromDepthArray(tempDepthFrame); // pictureBox_depthPicSmoothed.Image = CreateSmoothImageFromDepthArray(tempDepthFrame);
+
+                            // Create a pseudo color of the depth map
+                            // Too slow for 30 frames per second if not scaled down by 10x
+                            //this.pictureBox_depthPicSmoothed.BackgroundImage = BitmapManipulator.ConvertImageToHeatmapBitMap(BitmapManipulator.ScaleBitmap(tempDepthFrame, 0.1, 0.1, System.Drawing.Drawing2D.InterpolationMode.Default), Heatmap, false);
+
+                            // Create a byte arrya of the depth data
+                            //ConvertDepthFrameData(sender, depthFrame);
+
+                            DepthImagePixel[] depth = depthFrame.GetRawPixelData();
+                            pictureBox_colorPic.BackgroundImage = iRobotKinect.DepthExtensions.ToBitmap(depthFrame, PixelFormat.Format32bppRgb, iRobotKinect.DepthImageMode.Colors);
                         }
-
-                        pictureBox_depthPicSmoothed.BackgroundImage = openCVImg.Bitmap;
-                        richTextBoxObjectFound.Text = objectsFound.ToString();
-                        // The Smoothed Image will apply both a filter and a weighted moving average over the
-                        // depth data from the Kinect (depending on UI selections)
-                        //pictureBox_depthPicSmoothed.BackgroundImage = CreateSmoothImageFromDepthArray(tempDepthFrame); // pictureBox_depthPicSmoothed.Image = CreateSmoothImageFromDepthArray(tempDepthFrame);
-                        
-                        // Create a pseudo color of the depth map
-                        // Too slow for 30 frames per second if not scaled down by 10x
-                        //this.pictureBox_depthPicSmoothed.BackgroundImage = BitmapManipulator.ConvertImageToHeatmapBitMap(BitmapManipulator.ScaleBitmap(tempDepthFrame, 0.1, 0.1, System.Drawing.Drawing2D.InterpolationMode.Default), Heatmap, false);
-
-                        // Create a byte arrya of the depth data
-                        //ConvertDepthFrameData(sender, depthFrame);
-
-                        DepthImagePixel[] depth = depthFrame.GetRawPixelData();
-                        pictureBox_colorPic.BackgroundImage = iRobotKinect.DepthExtensions.ToBitmap(depthFrame, PixelFormat.Format32bppRgb, iRobotKinect.DepthImageMode.Colors);
+                        catch (Exception ex)
+                        {
+                            string exMessage = ex.Message;
+                        }
                     }
                 }
+                #endregion Depth
 
+                #region Skeleton
+                bool isSkeletonShown = false;
                 using (SkeletonFrame skelFrame = e.OpenSkeletonFrame())
                 {
                     if (skelFrame != null)
                     {
-                        Image tempSkeletonFrame = new Bitmap(this.pictureBox_skeleton.Width, this.pictureBox_skeleton.Height);
+                        Image tempSkeletonFrame = null; // new Bitmap(this.pictureBox_skeleton.Width, this.pictureBox_skeleton.Height);
                         // make the background black if there is no image
                         this.pictureBox_skeleton.BackColor = Color.Black;
                         this.pictureBox_skeleton.BackgroundImage = null;
 
-                        if (checkBox_colorCam.Checked)
+                        if (checkBox_colorCam.Checked && tempColorFrame != null)
                         {
                             tempSkeletonFrame = new Bitmap(tempColorFrame);
+                        }
+                        else
+                        {
+                            tempSkeletonFrame = new Bitmap(this.pictureBox_skeleton.Width, this.pictureBox_skeleton.Height);
                         }
 
                         if (this.checkBoxShowSkeleton.Checked)
@@ -636,22 +661,22 @@ namespace iRobotKinect
                                             double height = iRobotKinect.SkeletonExtensions.Height(skel);
                                         }
 
-                                        if (NGEFile != null)
+                                        if (MyFile != null)
                                         {
-                                            if (NGEFile.isRecording == true && NGEFile.isInitializing == true)
+                                            if (MyFile.isRecording == true && MyFile.isInitializing == true)
                                             {
-                                                NGEFile.Entry(skel);
+                                                MyFile.Entry(skel);
 
-                                                if (NGEFile.intializingCounter > initFrames)
+                                                if (MyFile.intializingCounter > initFrames)
                                                 {
-                                                    NGEFile.startWritingEntry();
+                                                    MyFile.startWritingEntry();
                                                 }
 
                                             }
 
-                                            if (NGEFile.isRecording == true && NGEFile.isInitializing == false)
+                                            if (MyFile.isRecording == true && MyFile.isInitializing == false)
                                             {
-                                                NGEFile.Motion(skel);
+                                                MyFile.Motion(skel);
                                                 this.textBox_sensorStatus.Text = "Record";
                                                 this.textBox_sensorStatus.BackColor = Color.Green;
                                             }
@@ -659,12 +684,18 @@ namespace iRobotKinect
                                     }
                                 }
                             }
-                            // Flip the bitmap
-                            tempSkeletonFrame = BitmapManipulator.MirrorYBitmap((Bitmap)tempSkeletonFrame);
+                            tempSkeletonFrame = BitmapManipulator.MirrorXBitmap((Bitmap)tempSkeletonFrame); // Flip the bitmap
+
                             this.pictureBox_skeleton.BackgroundImage = tempSkeletonFrame; // this.pictureBox_skeleton.Image = tempSkeletonFrame;
                             //this.pictureBox_skeleton.Image = new Bitmap(tempSkeletonFrame, this.pictureBox_skeleton.Width, this.pictureBox_skeleton.Height);
+                            isSkeletonShown = true;
                         }
                     }
+                }
+                #endregion Skeleton
+                if (tempColorFrame != null && isSkeletonShown == false)
+                {
+                    this.pictureBox_skeleton.BackgroundImage = BitmapManipulator.MirrorXBitmap((Bitmap)tempColorFrame); // Flip the bitmap
                 }
             }
             else
@@ -828,14 +859,14 @@ namespace iRobotKinect
 
         private void button_rec_Click(object sender, EventArgs e)
         {
-            if (NGEFile == null && sensor != null)
+            if (MyFile == null && sensor != null)
             {
                 this.textBox_sensorStatus.Text = "Initialize";
                 this.textBox_sensorStatus.BackColor = Color.Yellow;
                 DateTime thisDay = DateTime.UtcNow;
                 string txtFileName = thisDay.ToString("dd.MM.yyyy_HH.mm");
-                NGEFile = new MyWrite(txtFileName);
-                NGEFile.setTextFeld(textFields1);
+                MyFile = new MyWrite(txtFileName);
+                MyFile.setTextFeld(textFields1);
             }
         }
 
@@ -1004,12 +1035,12 @@ namespace iRobotKinect
 
         private void button_recStop_Click(object sender, EventArgs e)
         {
-            if (NGEFile != null)
+            if (MyFile != null)
             {
-                NGEFile.MyCloseFile();
+                MyFile.MyCloseFile();
                 this.textBox_sensorStatus.Text = "Recording captured";
                 this.textBox_sensorStatus.BackColor = Color.White;
-                NGEFile = null;
+                MyFile = null;
             }
         }
 
@@ -2165,7 +2196,6 @@ namespace iRobotKinect
                 case SpeechRecognizer.Verbs.Forwards:
                 case SpeechRecognizer.Verbs.Start:
                 case SpeechRecognizer.Verbs.Go:
-                case SpeechRecognizer.Verbs.Resume:
                     Program.UI.DriveForm.HandleKeys(Keys.Up);
                     break;
                 case SpeechRecognizer.Verbs.Back:
@@ -2177,9 +2207,18 @@ namespace iRobotKinect
                 case SpeechRecognizer.Verbs.Halt:
                 case SpeechRecognizer.Verbs.End:
                 case SpeechRecognizer.Verbs.Reset:
-                case SpeechRecognizer.Verbs.Pause:
                    Program.UI.DriveForm.HandleKeys(Keys.Space);
-                    break;
+                   break;
+
+                case SpeechRecognizer.Verbs.Pause:
+                   SpeechRecognizer.paused = true;
+                   MainForm.CRMainForm.checkBoxSpeech.Checked = false;
+                   break;
+                
+                case SpeechRecognizer.Verbs.Resume:
+                   SpeechRecognizer.paused = false;
+                   MainForm.CRMainForm.checkBoxSpeech.Checked = true;
+                   break;
 
                 //case SpeechRecognizer.Verbs.Pause:
                 //    this.myFallingThings.SetDropRate(0);

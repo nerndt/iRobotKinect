@@ -138,7 +138,7 @@
             // 
             // button_start
             // 
-            this.button_start.Location = new System.Drawing.Point(678, 307);
+            this.button_start.Location = new System.Drawing.Point(678, 358);
             this.button_start.Name = "button_start";
             this.button_start.Size = new System.Drawing.Size(75, 23);
             this.button_start.TabIndex = 2;
@@ -148,7 +148,7 @@
             // 
             // button_stop
             // 
-            this.button_stop.Location = new System.Drawing.Point(678, 336);
+            this.button_stop.Location = new System.Drawing.Point(678, 387);
             this.button_stop.Name = "button_stop";
             this.button_stop.Size = new System.Drawing.Size(75, 23);
             this.button_stop.TabIndex = 3;
@@ -159,7 +159,7 @@
             // textBox_sensorStatus
             // 
             this.textBox_sensorStatus.BackColor = System.Drawing.SystemColors.Window;
-            this.textBox_sensorStatus.Location = new System.Drawing.Point(678, 423);
+            this.textBox_sensorStatus.Location = new System.Drawing.Point(678, 474);
             this.textBox_sensorStatus.Name = "textBox_sensorStatus";
             this.textBox_sensorStatus.Size = new System.Drawing.Size(75, 20);
             this.textBox_sensorStatus.TabIndex = 4;
@@ -178,7 +178,7 @@
             "3",
             "2",
             "1"});
-            this.dropDown_fps.Location = new System.Drawing.Point(705, 12);
+            this.dropDown_fps.Location = new System.Drawing.Point(705, 63);
             this.dropDown_fps.Name = "dropDown_fps";
             this.dropDown_fps.Size = new System.Drawing.Size(75, 21);
             this.dropDown_fps.TabIndex = 7;
@@ -187,7 +187,7 @@
             // txtLabel_fps
             // 
             this.txtLabel_fps.AutoSize = true;
-            this.txtLabel_fps.Location = new System.Drawing.Point(675, 15);
+            this.txtLabel_fps.Location = new System.Drawing.Point(675, 66);
             this.txtLabel_fps.Name = "txtLabel_fps";
             this.txtLabel_fps.Size = new System.Drawing.Size(24, 13);
             this.txtLabel_fps.TabIndex = 9;
@@ -197,7 +197,7 @@
             // 
             this.pictureBox_skeleton.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.pictureBox_skeleton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox_skeleton.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox_skeleton.Location = new System.Drawing.Point(12, 58);
             this.pictureBox_skeleton.Name = "pictureBox_skeleton";
             this.pictureBox_skeleton.Size = new System.Drawing.Size(320, 240);
             this.pictureBox_skeleton.TabIndex = 10;
@@ -205,7 +205,7 @@
             // 
             // button_rec
             // 
-            this.button_rec.Location = new System.Drawing.Point(678, 365);
+            this.button_rec.Location = new System.Drawing.Point(678, 416);
             this.button_rec.Name = "button_rec";
             this.button_rec.Size = new System.Drawing.Size(75, 23);
             this.button_rec.TabIndex = 12;
@@ -215,7 +215,7 @@
             // 
             // button_recStop
             // 
-            this.button_recStop.Location = new System.Drawing.Point(678, 394);
+            this.button_recStop.Location = new System.Drawing.Point(678, 445);
             this.button_recStop.Name = "button_recStop";
             this.button_recStop.Size = new System.Drawing.Size(75, 23);
             this.button_recStop.TabIndex = 13;
@@ -228,7 +228,7 @@
             this.checkBox_colorCam.AutoSize = true;
             this.checkBox_colorCam.Checked = true;
             this.checkBox_colorCam.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_colorCam.Location = new System.Drawing.Point(678, 95);
+            this.checkBox_colorCam.Location = new System.Drawing.Point(678, 146);
             this.checkBox_colorCam.Name = "checkBox_colorCam";
             this.checkBox_colorCam.Size = new System.Drawing.Size(89, 17);
             this.checkBox_colorCam.TabIndex = 27;
@@ -240,7 +240,7 @@
             this.groupBox_smooth.Controls.Add(this.radioButton_smoothIntense);
             this.groupBox_smooth.Controls.Add(this.radioButton_smoothModerate);
             this.groupBox_smooth.Controls.Add(this.radioButton_smoothDefault);
-            this.groupBox_smooth.Location = new System.Drawing.Point(669, 133);
+            this.groupBox_smooth.Location = new System.Drawing.Point(669, 184);
             this.groupBox_smooth.Name = "groupBox_smooth";
             this.groupBox_smooth.Size = new System.Drawing.Size(111, 86);
             this.groupBox_smooth.TabIndex = 29;
@@ -282,7 +282,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(666, 68);
+            this.label1.Location = new System.Drawing.Point(666, 119);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 13);
             this.label1.TabIndex = 30;
@@ -290,7 +290,7 @@
             // 
             // textBox_init
             // 
-            this.textBox_init.Location = new System.Drawing.Point(730, 65);
+            this.textBox_init.Location = new System.Drawing.Point(730, 116);
             this.textBox_init.Name = "textBox_init";
             this.textBox_init.Size = new System.Drawing.Size(50, 20);
             this.textBox_init.TabIndex = 31;
@@ -302,7 +302,7 @@
             this.checkBoxShowSkeleton.AutoSize = true;
             this.checkBoxShowSkeleton.Checked = true;
             this.checkBoxShowSkeleton.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShowSkeleton.Location = new System.Drawing.Point(678, 115);
+            this.checkBoxShowSkeleton.Location = new System.Drawing.Point(678, 166);
             this.checkBoxShowSkeleton.Name = "checkBoxShowSkeleton";
             this.checkBoxShowSkeleton.Size = new System.Drawing.Size(113, 17);
             this.checkBoxShowSkeleton.TabIndex = 32;
@@ -315,7 +315,7 @@
             this.groupBoxActions.Controls.Add(this.buttonResetReconstruction);
             this.groupBoxActions.Controls.Add(this.checkBoxUseCameraPoseFinder);
             this.groupBoxActions.Controls.Add(this.groupBoxCreateMesh);
-            this.groupBoxActions.Location = new System.Drawing.Point(1034, 18);
+            this.groupBoxActions.Location = new System.Drawing.Point(1034, 69);
             this.groupBoxActions.Name = "groupBoxActions";
             this.groupBoxActions.Size = new System.Drawing.Size(178, 174);
             this.groupBoxActions.TabIndex = 34;
@@ -404,7 +404,7 @@
             this.groupBoxImageOptions.Controls.Add(this.checkBoxKinectView);
             this.groupBoxImageOptions.Controls.Add(this.checkBoxPauseIntegration);
             this.groupBoxImageOptions.Controls.Add(this.checkBoxCaptureColor);
-            this.groupBoxImageOptions.Location = new System.Drawing.Point(956, 239);
+            this.groupBoxImageOptions.Location = new System.Drawing.Point(956, 290);
             this.groupBoxImageOptions.Name = "groupBoxImageOptions";
             this.groupBoxImageOptions.Size = new System.Drawing.Size(240, 92);
             this.groupBoxImageOptions.TabIndex = 35;
@@ -477,7 +477,7 @@
             this.groupBoxDepthThreshold.Controls.Add(this.labelDepthThresholdMin);
             this.groupBoxDepthThreshold.Controls.Add(this.trackBarDepthThresholdMax);
             this.groupBoxDepthThreshold.Controls.Add(this.trackBarDepthThresholdMin);
-            this.groupBoxDepthThreshold.Location = new System.Drawing.Point(956, 336);
+            this.groupBoxDepthThreshold.Location = new System.Drawing.Point(956, 387);
             this.groupBoxDepthThreshold.Name = "groupBoxDepthThreshold";
             this.groupBoxDepthThreshold.Size = new System.Drawing.Size(132, 97);
             this.groupBoxDepthThreshold.TabIndex = 36;
@@ -544,9 +544,9 @@
             this.groupBoxVoxelInfo.Controls.Add(this.trackBarVolumeVoxelsPerMeter);
             this.groupBoxVoxelInfo.Controls.Add(this.label2);
             this.groupBoxVoxelInfo.Controls.Add(this.trackBarVolumeMaxIntegrationRate);
-            this.groupBoxVoxelInfo.Location = new System.Drawing.Point(786, 239);
+            this.groupBoxVoxelInfo.Location = new System.Drawing.Point(786, 290);
             this.groupBoxVoxelInfo.Name = "groupBoxVoxelInfo";
-            this.groupBoxVoxelInfo.Size = new System.Drawing.Size(164, 262);
+            this.groupBoxVoxelInfo.Size = new System.Drawing.Size(164, 246);
             this.groupBoxVoxelInfo.TabIndex = 36;
             this.groupBoxVoxelInfo.TabStop = false;
             this.groupBoxVoxelInfo.Text = "Voxel Info";
@@ -675,7 +675,7 @@
             // 
             this.pictureBox_depthPic.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.pictureBox_depthPic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox_depthPic.Location = new System.Drawing.Point(12, 261);
+            this.pictureBox_depthPic.Location = new System.Drawing.Point(12, 301);
             this.pictureBox_depthPic.Name = "pictureBox_depthPic";
             this.pictureBox_depthPic.Size = new System.Drawing.Size(320, 240);
             this.pictureBox_depthPic.TabIndex = 37;
@@ -685,7 +685,7 @@
             // 
             this.pictureBox_colorPic.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.pictureBox_colorPic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox_colorPic.Location = new System.Drawing.Point(343, 12);
+            this.pictureBox_colorPic.Location = new System.Drawing.Point(338, 58);
             this.pictureBox_colorPic.Name = "pictureBox_colorPic";
             this.pictureBox_colorPic.Size = new System.Drawing.Size(320, 240);
             this.pictureBox_colorPic.TabIndex = 38;
@@ -695,7 +695,7 @@
             // 
             this.pictureBox_depthPicSmoothed.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.pictureBox_depthPicSmoothed.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox_depthPicSmoothed.Location = new System.Drawing.Point(343, 261);
+            this.pictureBox_depthPicSmoothed.Location = new System.Drawing.Point(338, 300);
             this.pictureBox_depthPicSmoothed.Name = "pictureBox_depthPicSmoothed";
             this.pictureBox_depthPicSmoothed.Size = new System.Drawing.Size(320, 240);
             this.pictureBox_depthPicSmoothed.TabIndex = 39;
@@ -705,7 +705,7 @@
             // 
             this.groupBox1.Controls.Add(this.checkBoxDepthUseAverage);
             this.groupBox1.Controls.Add(this.checkBoxDepthUseFiltering);
-            this.groupBox1.Location = new System.Drawing.Point(669, 220);
+            this.groupBox1.Location = new System.Drawing.Point(669, 271);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(111, 67);
             this.groupBox1.TabIndex = 40;
@@ -744,7 +744,7 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.trackBarDepthOuterBand);
             this.groupBox2.Controls.Add(this.trackBarDepthInnerBand);
-            this.groupBox2.Location = new System.Drawing.Point(759, 507);
+            this.groupBox2.Location = new System.Drawing.Point(956, 493);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(252, 128);
             this.groupBox2.TabIndex = 37;
@@ -820,7 +820,7 @@
             // 
             // textBoxActualFramesPerSecond
             // 
-            this.textBoxActualFramesPerSecond.Location = new System.Drawing.Point(730, 42);
+            this.textBoxActualFramesPerSecond.Location = new System.Drawing.Point(730, 93);
             this.textBoxActualFramesPerSecond.Name = "textBoxActualFramesPerSecond";
             this.textBoxActualFramesPerSecond.Size = new System.Drawing.Size(50, 20);
             this.textBoxActualFramesPerSecond.TabIndex = 42;
@@ -829,7 +829,7 @@
             // labelActualFramesPerSecond
             // 
             this.labelActualFramesPerSecond.AutoSize = true;
-            this.labelActualFramesPerSecond.Location = new System.Drawing.Point(666, 45);
+            this.labelActualFramesPerSecond.Location = new System.Drawing.Point(666, 96);
             this.labelActualFramesPerSecond.Name = "labelActualFramesPerSecond";
             this.labelActualFramesPerSecond.Size = new System.Drawing.Size(63, 13);
             this.labelActualFramesPerSecond.TabIndex = 41;
@@ -837,7 +837,7 @@
             // 
             // textFields1
             // 
-            this.textFields1.Location = new System.Drawing.Point(9, 504);
+            this.textFields1.Location = new System.Drawing.Point(9, 543);
             this.textFields1.Margin = new System.Windows.Forms.Padding(0, 0, 3, 3);
             this.textFields1.Name = "textFields1";
             this.textFields1.setTextBoxAngles = "";
@@ -846,7 +846,7 @@
             this.textFields1.setTextBoxFrameRate = "";
             this.textFields1.setTextBoxLength = "";
             this.textFields1.setTextPosition = "";
-            this.textFields1.Size = new System.Drawing.Size(703, 209);
+            this.textFields1.Size = new System.Drawing.Size(560, 115);
             this.textFields1.TabIndex = 28;
             // 
             // groupBoxObjectSize
@@ -865,7 +865,7 @@
             this.groupBoxObjectSize.Controls.Add(this.labelObjectSizeMin);
             this.groupBoxObjectSize.Controls.Add(this.trackBarObjectMaxSize);
             this.groupBoxObjectSize.Controls.Add(this.trackBarObjectMinSize);
-            this.groupBoxObjectSize.Location = new System.Drawing.Point(803, 15);
+            this.groupBoxObjectSize.Location = new System.Drawing.Point(803, 66);
             this.groupBoxObjectSize.Name = "groupBoxObjectSize";
             this.groupBoxObjectSize.Size = new System.Drawing.Size(223, 211);
             this.groupBoxObjectSize.TabIndex = 43;

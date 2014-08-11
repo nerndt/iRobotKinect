@@ -40,14 +40,15 @@ namespace iRobotKinect
                 { "Reset", new WhatSaid { Verb = Verbs.Stop } },
                 { "Clear", new WhatSaid { Verb = Verbs.Stop } },
                 { "Stop", new WhatSaid { Verb = Verbs.Stop } },
-                { "Pause Game", new WhatSaid { Verb = Verbs.Stop } },
                 { "Freeze", new WhatSaid { Verb = Verbs.Stop } },
                 { "Unfreeze", new WhatSaid { Verb = Verbs.Go } },
-                { "Resume", new WhatSaid { Verb = Verbs.Go } },
                 { "Continue", new WhatSaid { Verb = Verbs.Go } },
                 { "Play", new WhatSaid { Verb = Verbs.Go } },
                 { "Start", new WhatSaid { Verb = Verbs.Go } },
                 { "Go", new WhatSaid { Verb = Verbs.Go } },
+
+                { "Pause", new WhatSaid { Verb = Verbs.Pause } },
+                { "Resume", new WhatSaid { Verb = Verbs.Resume } },
            };
 
         private readonly Dictionary<string, WhatSaid> gameplayPhrases = new Dictionary<string, WhatSaid>
@@ -169,7 +170,7 @@ namespace iRobotKinect
 
         private SpeechRecognitionEngine sre;
         private KinectAudioSource kinectAudioSource;
-        private bool paused;
+        public static bool paused = false;
         private bool isDisposed;
 
         private SpeechRecognizer()
@@ -486,7 +487,7 @@ namespace iRobotKinect
                 return;
             }
 
-            if (this.paused)
+            if (paused)
             {
                 // Only accept restart or reset
                 if ((said.Verb != Verbs.Resume) && (said.Verb != Verbs.Reset))
@@ -494,7 +495,7 @@ namespace iRobotKinect
                     return;
                 }
 
-                this.paused = false;
+                paused = false;
             }
             else
             {
@@ -506,7 +507,7 @@ namespace iRobotKinect
 
             if (said.Verb == Verbs.Pause)
             {
-                this.paused = true;
+                paused = true;
             }
 
             if (this.SaidSomething != null)

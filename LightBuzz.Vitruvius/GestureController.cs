@@ -159,14 +159,14 @@ namespace iRobotKinect
                     segments[4] = waveRightSegment1;
                     segments[5] = waveRightSegment2;
                     break;
-                case GestureType.ZoomIn:
+                case GestureType.ZoomOut:
                     segments = new IGestureSegment[3];
 
                     segments[0] = new ZoomSegment1();
                     segments[1] = new ZoomSegment2();
                     segments[2] = new ZoomSegment3();
                     break;
-                case GestureType.ZoomOut:
+                case GestureType.ZoomIn:
                     segments = new IGestureSegment[3];
 
                     segments[0] = new ZoomSegment3();
