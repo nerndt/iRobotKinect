@@ -182,7 +182,7 @@
             this.dropDown_fps.Name = "dropDown_fps";
             this.dropDown_fps.Size = new System.Drawing.Size(75, 21);
             this.dropDown_fps.TabIndex = 7;
-            this.dropDown_fps.Text = "3";
+            this.dropDown_fps.Text = "5";
             // 
             // txtLabel_fps
             // 
