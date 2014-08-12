@@ -278,7 +278,7 @@ namespace iRobotKinect
             MouseMessageFilter.MouseDown += new MouseEventHandler(OnGlobalMouseDown);
         }
 
-        static void OnGlobalMouseMove(object sender, MouseEventArgs e)
+        static void OnGlobalMouseMove(object sender, MouseEventArgs e) 
         {
             if (MainForm.CRMainForm != null && MainForm.CRMainForm.ActiveControl != null)
             {
